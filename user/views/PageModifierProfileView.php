@@ -13,6 +13,8 @@ class PageModifierProfileView extends GlobalView
             Modifier votre profile
         </div>
         <div class="card-body">
+            <a href="<?php echo "./profile?idUser=" . $_SESSION["user"]["idUtilisateur"] ?>" class="action-btn"
+                style="text-decoration:none;">retourner</a>
             <div class="row row-cols-1 row-cols-lg-2 h-100 justify-content-center gap-5 align-items-center">
                 <div class="col d-flex  flex-column justify-content-center align-items-center font"
                     style="max-width:400px">

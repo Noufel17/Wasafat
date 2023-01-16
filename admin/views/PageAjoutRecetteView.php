@@ -1,6 +1,6 @@
 <?php
 require_once('./views/Components.php');
-require_once('./controllers/PageAjoutRecetteController.php');
+require_once('./controllers/GestionRecettesController.php');
 require_once('./views/GlobalView.php');
 class PageAjoutRecetteView extends GlobalView
 {
@@ -74,7 +74,7 @@ class PageAjoutRecetteView extends GlobalView
                     <select id="diff" name="idFete" class="form-control">
                         <option value="0" selected>choisir Fete</option>
                         <?php
-                                $controller = new PageAjoutRecetteController();
+                                $controller = new GestionRecettesController();
                                 $fetes = $controller->getFetes();
                                 foreach ($fetes as $fete) {
                                 ?>
