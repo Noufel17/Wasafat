@@ -11,9 +11,9 @@ class PageAjoutRecetteView extends GlobalView
     <div class="col d-flex justify-content-center align-items-center font">
         <form action="./redirect.php" method="POST" id="ajout-form" enctype="multipart/form-data"
             class=" radius-20 shadow d-flex flex-column gap-4 p-4">
-            <a href="<?php echo "./profile?idUser=" . $_SESSION["user"]["idUtilisateur"] ?>" class="action-btn"
-                style="text-decoration:none;">retourner</a>
-            <input type="hidden" name="idUser" value="<?php echo $_SESSION["user"]["idUtilisateur"] ?>">
+            <center>
+                <a href="./gestion-recettes" class="action-btn" style="text-decoration:none;">retour</a>
+            </center>
             <div class="form-group w-100">
                 <label for="nom">Nom de la recette</label>
                 <input type="text" required class="form-control" id="nom" name="nom" placeholder="nom recette">
@@ -111,7 +111,7 @@ class PageAjoutRecetteView extends GlobalView
                                     placeholder="choisir un ingredient">
                                     <option value="0" selected>choisir ingrédient</option>
                                     <?php
-                                            $controller = new PageAjoutRecetteController();
+                                            $controller = new GestionRecettesController();
                                             $ingredients = $controller->getIngredients();
                                             foreach ($ingredients as $ingredient) {
                                             ?>
@@ -131,7 +131,7 @@ class PageAjoutRecetteView extends GlobalView
                                 <input type="text" name="unite[]" class="form-control" placeholder="unité de mesure">
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-success add-ing-btn">
+                                <button type="button" class="btn btn-success add-ing-btn">
                                     Ajouter Ingrédient
                                 </button>
                             </div>
@@ -155,7 +155,7 @@ class PageAjoutRecetteView extends GlobalView
                                     placeholder="description de l'étape"></textarea>
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-success add-step-btn">
+                                <button type="button" class="btn btn-success add-step-btn">
                                     Ajouter Étape
                                 </button>
                             </div>
@@ -174,8 +174,6 @@ class PageAjoutRecetteView extends GlobalView
     {
         $this->head();
         $this->header();
-        $this->menu();
         $this->content();
-        $this->footer();
     }
 }

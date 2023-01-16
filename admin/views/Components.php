@@ -97,15 +97,16 @@ class Components
     public function image($lienImage)
     {
     ?>
-<div class="media-container m-auto overflow-hidden">
-    <img src="<?php echo "../public/images/recettes" . $lienImage ?>" alt="" width="100%" style="max-height:600px">
+<div class="simple-media-container m-auto overflow-hidden">
+    <img src="<?php echo "../public/images/recettes" . $lienImage ?>" alt="" width="100%"
+        style="max-height:600px;object-fit:cover">
 </div>
 <?php
     }
     public function imageNews($lienImage)
     {
     ?>
-<div class="media-container m-auto overflow-hidden">
+<div class="simple-media-container m-auto overflow-hidden">
     <img src="<?php echo "../public/images/news" . $lienImage ?>" alt="" width="100%">
 </div>
 <?php
@@ -115,8 +116,8 @@ class Components
         if (isset($lienVideo)) {
         ?>
 
-<div class="media-container m-auto overflow-hidden w-100">
-    <video width="100%" src="<?php echo "../public/videos/recettes" . $lienVideo ?>" controls muted></video>
+<div class="simple-media-container m-auto overflow-hidden">
+    <video width="100%" src="<?php echo "../public/videos/recettes" . $lienVideo ?>" controles muted></video>
 </div>
 <?php
         }

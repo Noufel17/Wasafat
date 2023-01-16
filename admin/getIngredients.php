@@ -1,7 +1,7 @@
 <?php
-require_once('./controllers/PageAjoutRecetteController.php');
+require_once('./controllers/GestionRecettesController.php');
 
-$controller = new PageAjoutRecetteController();
+$controller = new GestionRecettesController();
 $ings = $controller->getIngredients();
 $result = array();
 foreach ($ings as $ing) {

@@ -1,6 +1,54 @@
 <?php
+require_once('./models/DBconnection.php');
 class GestionRecettesModel extends DBconnection
 {
+    public function getRecetteById($idRecette){
+        try {
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+                $qry = "SELECT 
+                Table2.idRecette,recette.nomRecette,recette.recetteImage,recette.description,recette.tempsPreparation,
+                recette.nombreCalories,recette.tempsCuission,recette.tempsRepos,recette.recetteVideo,recette.difficulte,
+                recette.etat,categorie,table3.notation, recette.tempsPreparation+
+                recette.tempsCuission+recette.tempsRepos AS tempsTotal,
+                (CASE WHEN COUNT = 0 THEN NULL ELSE saisonNaturelle END) AS saisonNaturelle
+            FROM (
+                SELECT
+                    MAX(count) AS COUNT,idRecette,saisonNaturelle
+                FROM
+                    (
+                    SELECT
+                        saisonNaturelle,COUNT(i.saisonNaturelle) AS COUNT,r.idRecette
+                    FROM
+                        secompose s
+                    LEFT OUTER JOIN ingredient i ON
+                        s.idIngredient = i.idIngredient
+                    LEFT OUTER JOIN recette r ON
+                        r.idRecette = s.idRecette
+                    GROUP BY
+                        r.idRecette,
+                        i.saisonNaturelle
+                ) AS Table1
+                GROUP BY idRecette ) AS Table2
+            JOIN recette on recette.idRecette = Table2.idRecette LEFT OUTER JOIN (
+                SELECT idRecette,AVG(note) AS notation FROM notation GROUP BY idRecette
+            ) table3 ON table3.idRecette = Table2.idRecette 
+            HAVING idRecette=:idRecette";
+            
+                $stmt = $dataBase->prepare($qry);
+                $stmt->execute([
+                    "idRecette" => $idRecette
+                ]);
+                $result = $stmt->fetch();
+            $this->disconnect($dataBase);
+            return $result;
+        } catch (Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
+        
+    }
     public function ajouterRecette(
         $nom,
         $tcuiss,
@@ -144,13 +192,83 @@ class GestionRecettesModel extends DBconnection
     }
     public function getFetes()
     {
-        $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
-        $qry = "SELECT * FROM fete";
-        $stmt = $dataBase->prepare($qry);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        $this->disconnect($dataBase);
-        return $result;
+        try{
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $qry = "SELECT * FROM fete";
+            $stmt = $dataBase->prepare($qry);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            $this->disconnect($dataBase);
+            return $result;
+        } catch (Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
+    }
+    public function validerRecette($idRecette){
+        try {
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $qry = "UPDATE recette SET etat=1 WHERE idRecette=:idRecette";
+            $stmt = $dataBase->prepare($qry);
+            $stmt->execute(["idRecette"=>$idRecette]);
+            $this->disconnect($dataBase);
+        } catch (Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
+    }
+    public function modifierRecette(
+        $idRecette,
+        $nom,
+        $tcuiss,
+        $tprepa,
+        $trepos,
+        $healthy,
+        $difficulte,
+        $category,
+        $descriptionRecette,
+        $calories,
+        $idFete,
+        $recetteImageName,
+        $recetteVideoName)
+        {
+        try {
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            // cas trivial il faut faire 4 cas par rapport au imagename et video name
+            $qry = "UPDATE recette SET nom=:nom,tempsPreparation=:tprepa,TempsCuission=:tcuiss,TempsRepos=:tropos,nombreCalories=:calories,difficulte=:difficulte,categorie=:category,recetteImage=:recetteImageName,
+            recetteVideo=:recetteVideoName,healthy=:healthy,description=:descriptionRecette,idFete=:idFete,etat=:etat  WHERE idRecette=:idRecette";
+            $stmt = $dataBase->prepare($qry);
+            $stmt->execute([
+                "idRecette"=>$idRecette,"nom" => $nom, "tprepa" => $tprepa, "tcuiss" => $tcuiss, "tropos" => $trepos, "calories" => $calories,
+                "difficulte" => $difficulte, "category" => $category,
+                "recetteImageName" => $recetteImageName, "recetteVideoName" => $recetteVideoName, "healthy" => $healthy,
+                "descriptionRecette" => $descriptionRecette, "idFete" => $idFete, "etat" => 1
+            ]);
+            $this->disconnect($dataBase);
+        } catch (Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
+    }
+    public function supprimerRecette($idRecette){
+        try {
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $qry = "DELETE FROM recette WHERE idRecette=:idRecette";
+            $stmt = $dataBase->prepare($qry);
+            $stmt->execute(["idRecette"=>$idRecette]);
+            $this->disconnect($dataBase);
+        } catch (Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
     }
     public function getAllRecettes()
     {
@@ -158,7 +276,33 @@ class GestionRecettesModel extends DBconnection
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
             $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            $qry = "SELECT * FROM recette";
+            $qry = "SELECT 
+            Table2.idRecette,recette.nomRecette,recette.recetteImage,recette.description,recette.tempsPreparation,
+            recette.nombreCalories,recette.tempsCuission,recette.tempsRepos,recette.recetteVideo,recette.difficulte,
+            recette.etat,categorie,table3.notation, recette.tempsPreparation+
+            recette.tempsCuission+recette.tempsRepos AS tempsTotal,
+            (CASE WHEN COUNT = 0 THEN NULL ELSE saisonNaturelle END) AS saisonNaturelle
+        FROM (
+            SELECT
+                MAX(count) AS COUNT,idRecette,saisonNaturelle
+            FROM
+                (
+                SELECT
+                    saisonNaturelle,COUNT(i.saisonNaturelle) AS COUNT,r.idRecette
+                FROM
+                    secompose s
+                LEFT OUTER JOIN ingredient i ON
+                    s.idIngredient = i.idIngredient
+                LEFT OUTER JOIN recette r ON
+                    r.idRecette = s.idRecette
+                GROUP BY
+                    r.idRecette,
+                    i.saisonNaturelle
+            ) AS Table1
+            GROUP BY idRecette ) AS Table2
+        JOIN recette on recette.idRecette = Table2.idRecette LEFT OUTER JOIN (
+            SELECT idRecette,AVG(note) AS notation FROM notation GROUP BY idRecette
+        ) table3 ON table3.idRecette = Table2.idRecette";
             $stmt = $dataBase->prepare($qry);
             $stmt->execute();
             $result = $stmt->fetchAll();
@@ -167,5 +311,26 @@ class GestionRecettesModel extends DBconnection
             echo 'Exception -> ';
             var_dump($e->getMessage());
         }
+    }
+    public function getEtapesRecette($idRecette)
+    {
+        $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+        $qry = "SELECT idEtape,numEtape,descriptionEtape FROM etape WHERE idRecette=:id ORDER BY numEtape";
+        $stmt = $dataBase->prepare($qry);
+        $stmt->execute(['id' => $idRecette]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->disconnect($dataBase);
+        return $result;
+    }
+    public function getIngredientsRecette($idRecette)
+    {
+        $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+        $qry = "SELECT *
+         FROM ingredient i INNER JOIN secompose s ON i.idIngredient=s.idIngredient WHERE idRecette=:id";
+        $stmt = $dataBase->prepare($qry);
+        $stmt->execute(['id' => $idRecette]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->disconnect($dataBase);
+        return $result;
     }
 }

@@ -159,13 +159,30 @@ nav {
   text-decoration: none !important;
   color: black;
 }
-.media-container {
+.simple-media-container {
+  height: 600px;
   width: 80%;
+  border-radius: 20px !important;
+  margin-top: 32px !important;
+  margin-bottom: 32px !important;
+}
+.media-container {
+  position: relative;
   height: 300px;
+  width: 80%;
   border-radius: 20px !important;
   margin-top: 32px !important;
   margin-bottom: 32px !important;
   cursor: pointer;
+}
+.media-container::after {
+  width: 100%;
+  height: 100%;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(rgba(88, 87, 87, 0.7), rgba(0, 0, 0, 0.7));
 }
 
 .media-container:hover {
@@ -265,5 +282,20 @@ label {
   position: absolute;
   top: 50%;
   left: 50%;
+  color: white;
+  font-weight: bolder;
+  font-size: 40px;
+  position: absolute;
+  z-index: 999;
   transform: translate(-50%, -50%);
+}
+.admin-link {
+  text-decoration: none;
+}
+.btn-d-none {
+  background: transparent;
+  border: none;
+}
+.color {
+  color: #dd7230 !important;
 }

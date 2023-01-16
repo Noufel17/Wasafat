@@ -13,14 +13,11 @@ class GlobalView
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link defer rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css">
     <link defer rel="stylesheet" type="text/css" href="./index.css">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
     </script>
-    <script defer src="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.js">
-    </script>
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="./jquery.js"></script>
+    <script defer src="./jquery.js"></script>
     <link rel="icon" href="../public/images/wasafat-logo">
     <title>projet_TDW</title>
 </head>

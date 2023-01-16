@@ -98,7 +98,8 @@ class Components
     {
     ?>
 <div class="media-container m-auto overflow-hidden">
-    <img src="<?php echo "../public/images/recettes" . $lienImage ?>" alt="" width="100%" style="max-height:600px">
+    <img src="<?php echo "../public/images/recettes" . $lienImage ?>" alt="" width="100%"
+        style="max-height:600px;object-fit:cover">
 </div>
 <?php
     }
@@ -106,7 +107,8 @@ class Components
     {
     ?>
 <div class="media-container m-auto overflow-hidden">
-    <img src="<?php echo "../public/images/news" . $lienImage ?>" alt="" width="100%">
+    <img src="<?php echo "../public/images/news" . $lienImage ?>" alt="" width="100%"
+        style="max-height:600px;object-fit:cover">
 </div>
 <?php
     }

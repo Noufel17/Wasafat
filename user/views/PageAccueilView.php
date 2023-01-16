@@ -20,7 +20,8 @@ class PageAccueilView extends GlobalView
 
         <div id="<?php echo $image["idItem"] ?>" class="carousel-item active">
             <a href="<?php echo "/Projet_tdw/user" . $image["lienDiapo"] ?>">
-                <img src=<?php echo $image["diapoImage"] ?> alt="" class="d-block w-100" style="max-height:600px">
+                <img src=<?php echo $image["diapoImage"] ?> alt="" class="d-block w-100"
+                    style="height:500px;object-fit:cover">
             </a>
         </div>
         <?php
@@ -29,7 +30,8 @@ class PageAccueilView extends GlobalView
 
         <div id="<?php echo $image["idItem"] ?>" class="carousel-item">
             <a href="<?php echo "/Projet_tdw/user" . $image["lienDiapo"] ?>">
-                <img src=<?php echo $image["diapoImage"] ?> alt="" class="d-block w-100" style="max-height:600px">
+                <img src=<?php echo $image["diapoImage"] ?> alt="" class="d-block w-100"
+                    style="height:500px;object-fit:cover">
             </a>
         </div>
         <?php

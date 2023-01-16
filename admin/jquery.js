@@ -65,8 +65,8 @@ $(function () {
       url: "./getIngredients.php",
       data: { action: "test" },
       success: function (response) {
+        console.log(response);
         var data = JSON.parse(response);
-        console.log(data);
         var options = "";
         for (elem in data) {
           console.log(elem);

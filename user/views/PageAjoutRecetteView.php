@@ -131,7 +131,7 @@ class PageAjoutRecetteView extends GlobalView
                                 <input type="text" name="unite[]" class="form-control" placeholder="unité de mesure">
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-success add-ing-btn">
+                                <button type="button" class="btn btn-success add-ing-btn">
                                     Ajouter Ingrédient
                                 </button>
                             </div>
@@ -155,7 +155,7 @@ class PageAjoutRecetteView extends GlobalView
                                     placeholder="description de l'étape"></textarea>
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-success add-step-btn">
+                                <button type="button" class="btn btn-success add-step-btn">
                                     Ajouter Étape
                                 </button>
                             </div>
