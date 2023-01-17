@@ -34,4 +34,8 @@ switch ($request) {
         $controller = new GestionRecettesController();
         $controller->afficherPageRecette($idRecette);
         break;
+    case '/Projet_tdw/admin/modifier-recette':
+        $controller = new GestionRecettesController();
+        $controller->afficherModifierRecette($idRecette);
+        break;
 }

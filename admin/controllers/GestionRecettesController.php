@@ -2,6 +2,7 @@
 require_once('./views/PageAjoutRecetteView.php');
 require_once('./views/PageRecetteView.php');
 require_once('./views/GestionRecettesView.php');
+require_once('./views/PageModifierRecetteView.php');
 require_once('./models/GestionRecettesModel.php');
 
 class GestionRecettesController
@@ -15,13 +16,13 @@ class GestionRecettesController
         $idRecette = $_POST["idRecette"];
         $model = new GestionRecettesModel();
         $model->supprimerRecette($idRecette);
-        header("Location :./gestion-recettes");
+        header("Location: ./gestion-recettes");
     }
     public function validerRecette(){
         $idRecette = $_POST["idRecette"];
         $model = new GestionRecettesModel();
         $model->validerRecette($idRecette);
-        header("Location :Projet_tdw/admin/gestion-recettes");
+        header("Location: ./gestion-recettes");
     }
 
     public function modifierRecette(){
@@ -102,7 +103,7 @@ class GestionRecettesController
             $recetteImageName,
             $recetteVideoName
         );
-        header("Location :./gestion-recettes");
+        header("Location: ./gestion-recettes");
     }
 
     public function ajouterRecette()
@@ -247,5 +248,10 @@ class GestionRecettesController
     {
         $view = new PageRecetteView();
         $view->afficherPageRecette($idRecette);
+    }
+    public function afficherModifierRecette($idRecette)
+    {
+        $view = new PageModifierRecetteView();
+        $view->afficherModifierRecette($idRecette);
     }
 }

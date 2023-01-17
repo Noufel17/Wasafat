@@ -150,7 +150,7 @@ class PageRecetteView extends GlobalView
             <h3 style="font-weight:bold;"><?php echo "Etape " . $etape["numEtape"] ?></h3>
             <p style="max-width:90%;font-weight:normal;">
                 <?php
-                            echo $etape["descriptionEtape"]
+                            echo $etape["DescriptionEtape"]
                             ?>
             </p>
 

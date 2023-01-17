@@ -11,7 +11,7 @@ class GestionRecettesModel extends DBconnection
                 Table2.idRecette,recette.nomRecette,recette.recetteImage,recette.description,recette.tempsPreparation,
                 recette.nombreCalories,recette.tempsCuission,recette.tempsRepos,recette.recetteVideo,recette.difficulte,
                 recette.etat,categorie,table3.notation, recette.tempsPreparation+
-                recette.tempsCuission+recette.tempsRepos AS tempsTotal,
+                recette.tempsCuission+recette.tempsRepos AS tempsTotal,recette.healthy,recette.idFete,
                 (CASE WHEN COUNT = 0 THEN NULL ELSE saisonNaturelle END) AS saisonNaturelle
             FROM (
                 SELECT
@@ -280,7 +280,7 @@ class GestionRecettesModel extends DBconnection
             Table2.idRecette,recette.nomRecette,recette.recetteImage,recette.description,recette.tempsPreparation,
             recette.nombreCalories,recette.tempsCuission,recette.tempsRepos,recette.recetteVideo,recette.difficulte,
             recette.etat,categorie,table3.notation, recette.tempsPreparation+
-            recette.tempsCuission+recette.tempsRepos AS tempsTotal,
+            recette.tempsCuission+recette.tempsRepos AS tempsTotal,recette.idFete,
             (CASE WHEN COUNT = 0 THEN NULL ELSE saisonNaturelle END) AS saisonNaturelle
         FROM (
             SELECT
@@ -315,7 +315,7 @@ class GestionRecettesModel extends DBconnection
     public function getEtapesRecette($idRecette)
     {
         $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
-        $qry = "SELECT idEtape,numEtape,descriptionEtape FROM etape WHERE idRecette=:id ORDER BY numEtape";
+        $qry = "SELECT idEtape,numEtape,DescriptionEtape FROM etape WHERE idRecette=:id ORDER BY numEtape";
         $stmt = $dataBase->prepare($qry);
         $stmt->execute(['id' => $idRecette]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

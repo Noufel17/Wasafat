@@ -63,13 +63,11 @@ class GestionRecettesView extends GlobalView
                                 data-placement="bottom" title="voir">
                                 <i class="fa-sharp fa-solid fa-eye color m-auto"></i>
                             </a>
-                            <form action="./redirect.php" method="post" class="mb-0">
-                                <input type="hidden" name="idRecette" value="<?php echo $recette["idRecette"] ?>">
-                                <button type="submit" name="modifier-recette" class="btn-d-none" data-toggle="tooltip"
-                                    data-placement="bottom" title="modifier">
-                                    <i class="fa-solid fa-pen-to-square color m-auto"></i>
-                                </button>
-                            </form>
+                            <a href="<?php echo "./modifier-recette?idRecette=".$recette["idRecette"] ?>"
+                                style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
+                                data-placement="bottom" title="modifier">
+                                <i class="fa-solid fa-pen-to-square color m-auto"></i>
+                            </a>
                             <form action="./redirect.php" method="post" class="mb-0">
                                 <input type="hidden" name="idRecette" value="<?php echo $recette["idRecette"] ?>">
                                 <button type="submit" name="supprimer-recette" class="btn-d-none" data-toggle="tooltip"
