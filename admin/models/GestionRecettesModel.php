@@ -133,6 +133,94 @@ class GestionRecettesModel extends DBconnection
             var_dump($e->getMessage());
         }
     }
+
+    public function getIngredients()
+    {
+        $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+        $qry = "SELECT idIngredient,nomIngredient FROM ingredient";
+        $stmt = $dataBase->prepare($qry);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $this->disconnect($dataBase);
+        return $result;
+    }
+    public function getFetes()
+    {
+        try{
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $qry = "SELECT * FROM fete";
+            $stmt = $dataBase->prepare($qry);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            $this->disconnect($dataBase);
+            return $result;
+        } catch (Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
+    }
+    public function validerRecette($idRecette){
+        try {
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $qry = "UPDATE recette SET etat=1 WHERE idRecette=:idRecette";
+            $stmt = $dataBase->prepare($qry);
+            $stmt->execute(["idRecette"=>$idRecette]);
+            $this->disconnect($dataBase);
+        } catch (Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
+    }
+    public function modifierEtapes(
+        $numEtape,
+        $descriptionEtape,
+        $idEtape
+    ) {
+        try {
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            foreach ($numEtape as $key => $value) {
+                $qry = "UPDATE etape SET numEtape=:numEtape,DescriptionEtape=:descriptionEtape 
+                 WHERE idEtape=:idEtape";
+                $stmt = $dataBase->prepare($qry);
+                $stmt->execute([
+                    "numEtape" => $value, "descriptionEtape" => $descriptionEtape[$key],
+                    "idEtape" => $idEtape[$key]
+                ]);
+            }
+            $this->disconnect($dataBase);
+        } catch (Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
+    }
+    public function modifierSecompose(
+        $idIngredient,
+        $quantite,
+        $unite
+    ) {
+        try {
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            foreach ($idIngredient as $key => $value) {
+                $qry = "UPDATE SET secompose quantiteIngredient=:quantite,unite=:unite 
+                    WHERE idIngredient=:idIngredient";
+                $stmt = $dataBase->prepare($qry);
+                $stmt->execute([
+                 "idIngredient" => $value,
+                    "quantite" => $quantite[$key], "unite" => $unite[$key]
+                ]);
+            }
+            $this->disconnect($dataBase);
+        } catch (Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
+    }
     public function insererEtapes(
         $numEtape,
         $descriptionEtape,
@@ -180,47 +268,6 @@ class GestionRecettesModel extends DBconnection
             var_dump($e->getMessage());
         }
     }
-    public function getIngredients()
-    {
-        $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
-        $qry = "SELECT idIngredient,nomIngredient FROM ingredient";
-        $stmt = $dataBase->prepare($qry);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        $this->disconnect($dataBase);
-        return $result;
-    }
-    public function getFetes()
-    {
-        try{
-            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
-            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            $qry = "SELECT * FROM fete";
-            $stmt = $dataBase->prepare($qry);
-            $stmt->execute();
-            $result = $stmt->fetchAll();
-            $this->disconnect($dataBase);
-            return $result;
-        } catch (Exception $e) {
-            echo 'Exception -> ';
-            var_dump($e->getMessage());
-        }
-    }
-    public function validerRecette($idRecette){
-        try {
-            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
-            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            $qry = "UPDATE recette SET etat=1 WHERE idRecette=:idRecette";
-            $stmt = $dataBase->prepare($qry);
-            $stmt->execute(["idRecette"=>$idRecette]);
-            $this->disconnect($dataBase);
-        } catch (Exception $e) {
-            echo 'Exception -> ';
-            var_dump($e->getMessage());
-        }
-    }
     public function modifierRecette(
         $idRecette,
         $nom,
@@ -233,29 +280,119 @@ class GestionRecettesModel extends DBconnection
         $descriptionRecette,
         $calories,
         $idFete,
+        $idIngredient,
+        $quantite,
+        $unite,
+        $idEtape,
+        $numEtape,
+        $descriptionEtape,
         $recetteImageName,
-        $recetteVideoName)
+        $recetteVideoName,
+        $addedIdIngredient,
+        $addedQuantite,
+        $addedUnite,
+        $addedNumEtape,
+        $addedDescriptionEtape
+        )
         {
+        // echo $idRecette;
+        // echo $nom;
+        // echo $tcuiss;
+        // echo $tprepa;
+        // echo $trepos;
+        // echo $healthy;
+        // echo $difficulte;
+        // echo $category;
+        // echo $descriptionRecette;
+        // echo $calories;
+        // echo $idFete;
+        // print_r($idIngredient);
+        // print_r($quantite);
+        // print_r($unite);
+        // print_r($numEtape);
+        // print_r($descriptionEtape);
+        // echo $recetteImageName;
+        // echo $recetteVideoName;
         try {
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
             $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            // cas trivial il faut faire 4 cas par rapport au imagename et video name
-            $qry = "UPDATE recette SET nom=:nom,tempsPreparation=:tprepa,TempsCuission=:tcuiss,TempsRepos=:tropos,nombreCalories=:calories,difficulte=:difficulte,categorie=:category,recetteImage=:recetteImageName,
-            recetteVideo=:recetteVideoName,healthy=:healthy,description=:descriptionRecette,idFete=:idFete,etat=:etat  WHERE idRecette=:idRecette";
-            $stmt = $dataBase->prepare($qry);
-            $stmt->execute([
-                "idRecette"=>$idRecette,"nom" => $nom, "tprepa" => $tprepa, "tcuiss" => $tcuiss, "tropos" => $trepos, "calories" => $calories,
-                "difficulte" => $difficulte, "category" => $category,
-                "recetteImageName" => $recetteImageName, "recetteVideoName" => $recetteVideoName, "healthy" => $healthy,
-                "descriptionRecette" => $descriptionRecette, "idFete" => $idFete, "etat" => 1
-            ]);
+            // cas trivial il faut faire 4 cas par rapport au image name et video name
+            if($recetteImageName != NULL && $recetteVideoName != NULL){
+                $qry = "UPDATE recette SET nomRecette=:nom,tempsPreparation=:tprepa,TempsCuission=:tcuiss,TempsRepos=:tropos,nombreCalories=:calories,difficulte=:difficulte,categorie=:category,recetteImage=:recetteImageName,
+                recetteVideo=:recetteVideoName,healthy=:healthy,description=:descriptionRecette,idFete=:idFete,etat=:etat  WHERE idRecette=:idRecette";
+                $stmt = $dataBase->prepare($qry);
+                $stmt->execute([
+                    "idRecette"=>$idRecette,"nom" => $nom, "tprepa" => $tprepa, "tcuiss" => $tcuiss, "tropos" => $trepos, "calories" => $calories,
+                    "difficulte" => $difficulte, "category" => $category,
+                    "recetteImageName" => $recetteImageName, "recetteVideoName" => $recetteVideoName, "healthy" => $healthy,
+                    "descriptionRecette" => $descriptionRecette, "idFete" => $idFete, "etat" => 1
+                ]); 
+            }
+            if($recetteImageName != NULL && $recetteVideoName == NULL){
+                $qry = "UPDATE recette SET nomRecette=:nom,tempsPreparation=:tprepa,TempsCuission=:tcuiss,TempsRepos=:tropos,nombreCalories=:calories,difficulte=:difficulte,categorie=:category,recetteImage=:recetteImageName,
+                healthy=:healthy,description=:descriptionRecette,idFete=:idFete,etat=:etat  WHERE idRecette=:idRecette";
+                $stmt = $dataBase->prepare($qry);
+                $stmt->execute([
+                    "idRecette"=>$idRecette,"nom" => $nom, "tprepa" => $tprepa, "tcuiss" => $tcuiss, "tropos" => $trepos, "calories" => $calories,
+                    "difficulte" => $difficulte, "category" => $category,
+                    "recetteImageName" => $recetteImageName,"healthy" => $healthy,
+                    "descriptionRecette" => $descriptionRecette, "idFete" => $idFete, "etat" => 1
+                ]); 
+            }
+            if($recetteImageName == NULL && $recetteVideoName != NULL){
+                $qry = "UPDATE recette SET nomRecette=:nom,tempsPreparation=:tprepa,TempsCuission=:tcuiss,TempsRepos=:tropos,nombreCalories=:calories,difficulte=:difficulte,categorie=:category,
+                recetteVideo=:recetteVideoName,healthy=:healthy,description=:descriptionRecette,idFete=:idFete,etat=:etat  WHERE idRecette=:idRecette";
+                $stmt = $dataBase->prepare($qry);
+                $stmt->execute([
+                    "idRecette"=>$idRecette,"nom" => $nom, "tprepa" => $tprepa, "tcuiss" => $tcuiss, "tropos" => $trepos, "calories" => $calories,
+                    "difficulte" => $difficulte, "category" => $category,
+                    "recetteVideoName" => $recetteVideoName,"healthy" => $healthy,
+                    "descriptionRecette" => $descriptionRecette, "idFete" => $idFete, "etat" => 1
+                ]); 
+            }
+            if($recetteImageName == NULL && $recetteVideoName == NULL){
+                $qry = "UPDATE recette SET nomRecette=:nom,tempsPreparation=:tprepa,TempsCuission=:tcuiss,TempsRepos=:tropos,nombreCalories=:calories,difficulte=:difficulte,categorie=:category,
+                healthy=:healthy,description=:descriptionRecette,idFete=:idFete,etat=:etat  WHERE idRecette=:idRecette";
+                $stmt = $dataBase->prepare($qry);
+                $stmt->execute([
+                    "idRecette"=>$idRecette,"nom" => $nom, "tprepa" => $tprepa, "tcuiss" => $tcuiss, "tropos" => $trepos, "calories" => $calories,
+                    "difficulte" => $difficulte, "category" => $category,"healthy" => $healthy,
+                    "descriptionRecette" => $descriptionRecette, "idFete" => $idFete, "etat" => 1
+                ]); 
+            }
+            $this->modifierEtapes(
+                $numEtape,
+                $descriptionEtape,
+                $idEtape
+            );
+            $this->modifierSecompose(
+                $idIngredient,
+                $quantite,
+                $unite
+            );
+            if($addedIdIngredient[0]!=0){ // not empty array
+                $this->insererSecompose(
+                    $idRecette,
+                    $addedIdIngredient,
+                    $addedQuantite,
+                    $addedUnite
+                );
+            }
+            if($addedNumEtape[0]!=0){ // not empty array
+                $this->insererEtapes(
+                    $addedNumEtape,
+                    $addedDescriptionEtape,
+                    $idRecette
+                );
+            }
             $this->disconnect($dataBase);
         } catch (Exception $e) {
             echo 'Exception -> ';
             var_dump($e->getMessage());
         }
     }
+    
     public function supprimerRecette($idRecette){
         try {
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);

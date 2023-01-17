@@ -175,14 +175,14 @@ class PageModifierRecetteView extends GlobalView
             </div>
             <div class="card">
                 <div class="card-header">
-                    Ajouter les Ingrédients de la recette
+                    Modifier les Ingrédients de la recette
                 </div>
                 <div class="card-body">
-                    <div id="ingredients">
+                    <div id="modifIngredients">
                         <?php
                             foreach($ingredients as $ingredient){
                                 ?>
-                        <div class="row row-cols-1 row-cols-lg-4 mb-3">
+                        <div class="row row-cols-1 row-cols-lg-3 mb-3">
                             <div class="form-group col-md-4">
                                 <select name="idIngredient[]" class="form-control" required
                                     placeholder="choisir un ingredient">
@@ -218,19 +218,19 @@ class PageModifierRecetteView extends GlobalView
                             <?php
                             if($ingredient["idIngredient"]==end($ingredients)["idIngredient"]){
                                 ?>
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                                 <button type="button" class="btn btn-success add-ing-btn">
                                     Ajouter Ingrédient
                                 </button>
-                            </div>
+                            </div> -->
                             <?php
                             }else{
                                 ?>
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                                 <button type="button" class="btn btn-danger remove-ing-btn">
                                     Supprimer Ingrédient
                                 </button>
-                            </div>
+                            </div> -->
                             <?php
                             }
                             ?>
@@ -243,14 +243,55 @@ class PageModifierRecetteView extends GlobalView
             </div>
             <div class="card">
                 <div class="card-header">
-                    Ajouter les Etapes de la recette
+                    Ajouter des Ingrédients
                 </div>
                 <div class="card-body">
-                    <div id="etapes">
+                    <div id="ingredients">
+                        <div class="row row-cols-1 row-cols-lg-4 mb-3">
+                            <div class="form-group col-md-4">
+                                <select name="addedIdIngredient[]" class="form-control" required
+                                    placeholder="choisir un ingredient">
+                                    <option value="0" selected>choisir ingrédient</option>
+                                    <?php
+                                            $controller = new GestionRecettesController();
+                                            $ingsa = $controller->getIngredients();
+                                            foreach ($ingsa as $inga) {
+                                            ?>
+                                    <option value="<?php echo $inga["idIngredient"] ?>">
+                                        <?php echo $inga["nomIngredient"] ?></option>
+                                    <?php
+                                            }
+                                            ?>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <input type="number" name="addedQuantite[]" class="form-control"
+                                    placeholder="quantité de l'ingrédient">
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <input type="text" name="addedUnite[]" class="form-control"
+                                    placeholder="unité de mesure">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-success add-ing-btn">
+                                    Ajouter Ingrédient
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Modifier les Etapes de la recette
+                </div>
+                <div class="card-body">
+                    <div id="modifEtapes">
                         <?php
                         foreach($steps as $step){
                             ?>
                         <div class="row row-cols-1 row-cols-md-3 mb-5">
+                            <input type="hidden" name="idEtape[]" value="<?php echo $step["idEtape"] ?>">
                             <div class="col-md-4 mb-3">
                                 <input type="number" name="numEtape[]" class="form-control" required
                                     placeholder="numéro de l'étape" value="<?php echo $step["numEtape"] ?>">
@@ -263,19 +304,19 @@ class PageModifierRecetteView extends GlobalView
                             <?php
                             if($step["idEtape"]==end($steps)["idEtape"]){
                                 ?>
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                                 <button type="button" class="btn btn-success add-step-btn">
                                     Ajouter Étape
                                 </button>
-                            </div>
+                            </div> -->
                             <?php
                             }else{
                                 ?>
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                                 <button type="button" class="btn btn-danger remove-step-btn">
                                     Supprimer Étape
                                 </button>
-                            </div>
+                            </div> -->
                             <?php
                             }
                             ?>
@@ -286,8 +327,31 @@ class PageModifierRecetteView extends GlobalView
                     </div>
                 </div>
             </div>
-
-            <center> <button type="submit" class="action-btn" name="modifier-recette">Ajouter la recette</button>
+            <div class="card">
+                <div class="card-header">
+                    Ajouter des Etapes
+                </div>
+                <div class="card-body">
+                    <div id="etapes">
+                        <div class="row row-cols-1 row-cols-md-3 mb-5">
+                            <div class="col-md-4 mb-3">
+                                <input type="number" name="addedNumEtape[]" class="form-control"
+                                    placeholder="numéro de l'étape">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <textarea name="addedDescriptionEtape[]" class="form-control"
+                                    placeholder="description de l'étape"></textarea>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-success add-step-btn">
+                                    Ajouter Étape
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <center> <button type="submit" class="action-btn" name="modifier-recette">Modifier la recette</button>
             </center>
         </form>
     </div>

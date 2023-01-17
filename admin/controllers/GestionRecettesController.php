@@ -44,16 +44,42 @@ class GestionRecettesController
         $idIngredient = $_POST["idIngredient"];
         $quantite = $_POST["quantite"];
         $unite = $_POST["unite"];
+        $idEtape = $_POST["idEtape"];
         $numEtape = $_POST["numEtape"];
         $descriptionEtape = $_POST["descriptionEtape"];
-        $recetteImage = $_FILES["recetteImage"];
+        $addedIdIngredient = $_POST["addedIdIngredient"];
+        $addedQuantite = $_POST["addedQuantite"];
+        $addedUnite = $_POST["addedUnite"];
+        $addedNumEtape = $_POST["addedNumEtape"];
+        $addedDescriptionEtape = $_POST["addedDescriptionEtape"];
+        if(isset($_FILES["recetteImage"])){
+            $recetteImage = $_FILES["recetteImage"];
+        }
         if (isset($_FILES["recetteVideo"])) {
             $recetteVideo = $_FILES["recetteVideo"];
         }
-
+        // echo $idRecette;
+        // echo $nom;
+        // echo $tcuiss;
+        // echo $tprepa;
+        // echo $trepos;
+        // echo $healthy;
+        // echo $difficulte;
+        // echo $category;
+        // echo $descriptionRecette;
+        // echo $calories;
+        // echo $idFete;
+        // print_r($idIngredient);
+        // print_r($quantite);
+        // print_r($unite);
+        // print_r($numEtape);
+        // print_r($descriptionEtape);
+        // print_r($recetteImage);
+        // print_r($recetteVideo);
 
         // uploader le ficher de l'image
 
+       if($recetteImage["error"]==0){
         $r = explode(".", $recetteImage["name"]);
         $recetteImageName = $r[0];
         $recetteImageExt = strtolower(end($r));
@@ -66,6 +92,9 @@ class GestionRecettesController
             move_uploaded_file($tmpImage, $imageDest);
         }
         $recetteImageName = "/" . $recetteImageName;
+       }else{
+            $recetteImageName = NULL;
+       }    
         // uploader le ficher du video
         if ($recetteVideo["error"] == 0) {
             $v = explode(".", $recetteVideo["name"]);
@@ -77,7 +106,6 @@ class GestionRecettesController
             }
             if (in_array($recetteVideoExt, array('webm', 'avi', 'mp4'))) {
                 $videoDest = "public/videos/recettes/" . $recetteVideo["name"];
-                echo $videoDest;
                 move_uploaded_file($tmpVideo, $videoDest);
             }
             $recetteVideoName = "/" . $recetteVideoName;
@@ -100,8 +128,19 @@ class GestionRecettesController
             $descriptionRecette,
             $calories,
             $idFete,
+            $idIngredient,
+            $quantite,
+            $unite,
+            $idEtape,
+            $numEtape,
+            $descriptionEtape,
             $recetteImageName,
-            $recetteVideoName
+            $recetteVideoName,
+            $addedIdIngredient,
+            $addedQuantite,
+            $addedUnite,
+            $addedNumEtape,
+            $addedDescriptionEtape
         );
         header("Location: ./gestion-recettes");
     }
@@ -180,34 +219,29 @@ class GestionRecettesController
         // echo $descriptionRecette;
         // echo $calories;
         // echo $idFete;
-        // print_r($idIngredient);
-        // print_r($unite);
-        // print_r($quantite);
-        // print_r($numEtape);
-        // print_r($descriptionEtape);
         // echo $recetteImageName;
         // echo $recetteVideoName;
-        $model = new GestionRecettesModel();
-        $model->ajouterRecette(
-            $nom,
-            $tcuiss,
-            $tprepa,
-            $trepos,
-            $healthy,
-            $difficulte,
-            $category,
-            $descriptionRecette,
-            $calories,
-            $idFete,
-            $idIngredient,
-            $quantite,
-            $unite,
-            $numEtape,
-            $descriptionEtape,
-            $recetteImageName,
-            $recetteVideoName
-        );
-        header("Location: ./gestion-recettes");
+        // $model = new GestionRecettesModel();
+        // $model->ajouterRecette(
+        //     $nom,
+        //     $tcuiss,
+        //     $tprepa,
+        //     $trepos,
+        //     $healthy,
+        //     $difficulte,
+        //     $category,
+        //     $descriptionRecette,
+        //     $calories,
+        //     $idFete,
+        //     $idIngredient,
+        //     $quantite,
+        //     $unite,
+        //     $numEtape,
+        //     $descriptionEtape,
+        //     $recetteImageName,
+        //     $recetteVideoName
+        // );
+        // header("Location: ./gestion-recettes");
     }
     public function getIngredients()
     {
