@@ -9,7 +9,7 @@ class PageLoginModel extends DBconnection
         $stmt->execute(['email' => $email]);
         $result = $stmt->fetch();
         if ($result) {
-            if (password_verify($password, $result['hashedPassword'])) {
+            if (password_verify($password, $result['hashedPassword']) && $result['valide']>0) {
                 $this->disconnect($dataBase);
                 return $result;
             }

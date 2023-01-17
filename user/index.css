@@ -64,6 +64,7 @@ nav {
   align-items: center;
   justify-content: center;
   padding: 20px 20px 20px 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 12px;
 }
 .action-btn:hover {
   opacity: 0.8;

@@ -4,7 +4,7 @@ class PageCategoryModel extends DBconnection
     public function getRecettesByCategory($idCategory)
     {
         $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
-        $qry = "SELECT * FROM recette WHERE categorie=:category";
+        $qry = "SELECT * FROM recette WHERE categorie=:category AND etat=1";
         $stmt = $dataBase->prepare($qry);
         $stmt->execute(['category' => $idCategory]);
         $result = $stmt->fetchAll();
@@ -94,7 +94,7 @@ class PageCategoryModel extends DBconnection
                         WHEN 3 THEN nombreCalories BETWEEN 1000 AND 2000
                         WHEN 4 THEN nombreCalories > 2000
                     END
-                    ) AND categorie = :category ";
+                    ) AND categorie = :category AND etat=1";
             $stmt = $dataBase->prepare($qry);
             $stmt->execute([
                 "tprep" => $tprep,

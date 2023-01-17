@@ -43,7 +43,7 @@ class PageAjoutRecetteController
             // wait untill file is uploaded
         }
         if (in_array($recetteImageExt, array('jpg', 'jpeg', 'png', 'mp4'))) {
-            $imageDest = "public/images/recettes/" . $recetteImage["name"];
+            $imageDest = "../public/images/recettes/" . $recetteImage["name"];
             move_uploaded_file($tmpImage, $imageDest);
         }
         $recetteImageName = "/" . $recetteImageName;
@@ -57,7 +57,7 @@ class PageAjoutRecetteController
                 // wait untill file is uploaded
             }
             if (in_array($recetteVideoExt, array('webm', 'avi', 'mp4'))) {
-                $videoDest = "public/videos/recettes/" . $recetteVideo["name"];
+                $videoDest = "../public/videos/recettes/" . $recetteVideo["name"];
                 echo $videoDest;
                 move_uploaded_file($tmpVideo, $videoDest);
             }

@@ -19,8 +19,8 @@ class GestionRecettesView extends GlobalView
     </a>
 </center>
 <div card>
-    <div class="card w-75 mx-auto">
-        <div class="card-header d-flex flex-row justify-content-between align-items-center">
+    <div class="card mx-auto mb-4" style="width:90%">
+        <div class=" card-header d-flex flex-row justify-content-between align-items-center">
             Gestion des recettes
             <a href="./ajouter-recette" class="action-btn" style="test-decoration:none">
                 Ajouter une recette
@@ -30,7 +30,7 @@ class GestionRecettesView extends GlobalView
             <table data-search="true" data-toggle="table" class="table-style">
                 <thead>
                     <tr>
-                        <th data-sortable="true">nom</th>
+                        <th data-sortable="true">nom de la recette</th>
                         <th data-sortable="true">temps de <br>préparation</th>
                         <th data-sortable="true">temps de <br>cuisson</th>
                         <th data-sortable="true">temps<br> total</th>
@@ -60,7 +60,7 @@ class GestionRecettesView extends GlobalView
                         <td class="d-flex flex-row justify-content-center align-items-center">
                             <a href="<?php echo "./recette?idRecette=".$recette["idRecette"] ?>"
                                 style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
-                                data-placement="bottom" title="voir">
+                                data-placement="bottom" title="voir détaills">
                                 <i class="fa-sharp fa-solid fa-eye color m-auto"></i>
                             </a>
                             <a href="<?php echo "./modifier-recette?idRecette=".$recette["idRecette"] ?>"
@@ -71,7 +71,7 @@ class GestionRecettesView extends GlobalView
                             <form action="./redirect.php" method="post" class="mb-0">
                                 <input type="hidden" name="idRecette" value="<?php echo $recette["idRecette"] ?>">
                                 <button type="submit" name="supprimer-recette" class="btn-d-none" data-toggle="tooltip"
-                                    data-placement="bottom" title="supprimer">
+                                    data-placement="bottom" title="supprimer recette">
                                     <i class="fa-solid fa-trash color m-auto"></i>
                                 </button>
                             </form>
@@ -81,7 +81,7 @@ class GestionRecettesView extends GlobalView
                             <form action="./redirect.php" method="post" class="mb-0">
                                 <input type="hidden" name="idRecette" value="<?php echo $recette["idRecette"] ?>">
                                 <button type="submit" name="valider-recette" class="btn-d-none" data-toggle="tooltip"
-                                    data-placement="bottom" title="valider">
+                                    data-placement="bottom" title="valider recette">
                                     <i class="fa-solid fa-check color m-auto"></i>
                                 </button>
                             </form>

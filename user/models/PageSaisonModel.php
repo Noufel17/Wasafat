@@ -29,7 +29,7 @@ class PageSaisonModel extends DBconnection
                 saisonNaturelle != 'partout'
         ) AS Table1
         GROUP BY idRecette ) AS Table2
-    JOIN recette on recette.idRecette = Table2.idRecette WHERE saisonNaturelle=:saison";
+    JOIN recette on recette.idRecette = Table2.idRecette WHERE saisonNaturelle=:saison AND etat=1";
         $stmt = $dataBase->prepare($qry);
         $stmt->execute(['saison' => $saison]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -1,13 +1,14 @@
 <?php
 require_once('./views/Components.php');
-class PageNewsDetailsView extends GlobalView
+require_once('./controllers/GestionNewsController.php');
+class PageNewsView extends GlobalView
 {
     public function content($idNews)
     {
+        $this->retour();
         $components = new Components();
-        $controller = new PageNewsDetailsController();
+        $controller = new GestionNewsController();
         $news = $controller->getNewsById($idNews);
-        // coverImage de la news quand on le recupere de la base de donnees
         $corps = $news["corps"];
         $components->imageNews($news["coverImage"]);
         $this->corps($news["titre"], $corps, $news["images"]);
@@ -15,13 +16,19 @@ class PageNewsDetailsView extends GlobalView
             $components->video($news["video"]);
         }
     }
-
+    public function retour(){
+        ?>
+<center>
+    <a href="./gestion-news" class="action-btn" style="text-decoration:none;">retour</a>
+</center>
+<?php
+    }
     public function corps($titre, $corps, $images)
     {
 ?>
 <div class="container" style="width:80%;">
     <h2 style="font-weight:bold;"><?php echo $titre ?></h2>
-    <div class="d-flex flex-row gap-4">
+    <div class="d-flex flex-row justify-content-center align-items-center gap-4">
         <div>
             <?php
                     $corps = explode("$", $corps);
@@ -62,12 +69,10 @@ class PageNewsDetailsView extends GlobalView
 <?php
 
     }
-    public function afficherPageNewsDetails($idNews)
+    public function afficherPageNews($idNews)
     {
         $this->head();
         $this->header();
-        $this->menu();
         $this->content($idNews);
-        $this->footer();
     }
 }

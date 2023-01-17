@@ -44,7 +44,7 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 90%;
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 2%;
@@ -67,6 +67,7 @@ nav {
   align-items: center;
   justify-content: center;
   padding: 20px 20px 20px 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 6px;
 }
 .action-btn:hover {
   opacity: 0.8;
@@ -284,9 +285,11 @@ label {
   left: 50%;
   color: white;
   font-weight: bolder;
-  font-size: 40px;
+  font-size: 32px;
   position: absolute;
   z-index: 999;
+  min-width: 400px;
+  text-align: center;
   transform: translate(-50%, -50%);
 }
 .admin-link {
@@ -298,4 +301,32 @@ label {
 }
 .color {
   color: #dd7230 !important;
+}
+.table-style table {
+  border-radius: 6px !important;
+}
+.table-style thead {
+  background-color: #dd7230;
+  color: white;
+}
+.table-style tr:nth-child(even) {
+  background-color: #f7f5f5;
+}
+.table-style tr,
+td,
+th {
+  text-align: center;
+  border: none;
+}
+.table-style thead th:first-child {
+  border-top-left-radius: 10px;
+}
+.table-style thead th:last-child {
+  border-top-right-radius: 10px;
+}
+.table-style tbody tr:last-child > td:first-child {
+  border-bottom-left-radius: 10px;
+}
+.table-style tbody tr:last-child > td:last-child {
+  border-bottom-right-radius: 10px;
 }

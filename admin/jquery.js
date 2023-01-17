@@ -163,4 +163,39 @@ $(function () {
     e.preventDefault();
     $(this).parent().parent().parent().remove();
   });
+
+  $(".add-para-btn").on("click", function (e) {
+    e.preventDefault();
+    $("#para").append(`<div class="col-md-12 mb-3">
+    <label for="corps" class="form-label">Paragraphs</label>
+    <textarea name="paragraph[]" class="form-control" style="height:200px" required
+        placeholder="Paragraph"></textarea>
+    <button type="button" class="btn btn-danger remove-para-btn mt-2">
+        Supprimer paragraph
+    </button>
+</div>`);
+  });
+  $(document).on("click", ".remove-para-btn", function (e) {
+    e.preventDefault();
+    $(this).parent().remove();
+  });
+  $(".add-img-btn").on("click", function (e) {
+    e.preventDefault();
+    $(
+      "#images"
+    ).append(`<div class="form-group mb-3 row row-cols-2 align-items-center">
+    <div class="col md-cols-8">
+        <input class="form-control" type="file" id="newsImage" name="newsImages[]">
+    </div>
+    <div class="col md-cols-4">
+        <button type="button" class="btn btn-danger remove-img-btn">
+            Supprimer une image
+        </button>
+    </div>
+</div>`);
+  });
+  $(document).on("click", ".remove-img-btn", function (e) {
+    e.preventDefault();
+    $(this).parent().parent().remove();
+  });
 });

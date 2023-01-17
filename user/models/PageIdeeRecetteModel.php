@@ -66,7 +66,7 @@ class PageIdeeRecetteModel extends DBconnection
        INNER JOIN (
            
        SELECT idRecette,AVG(note) AS notation FROM notation GROUP BY idRecette
-               ) AS table1 ON recette.idRecette = table1.idRecette WHERE saisonNaturelle=:saison AND notation =:notation";
+               ) AS table1 ON recette.idRecette = table1.idRecette WHERE saisonNaturelle=:saison AND notation =:notation AND etat=1";
             $stmt2 = $dataBase->prepare($sql);
             $stmt2->execute(["saison" => $saison, "notation" => $notation]);
             $result2 = $stmt2->fetchAll();
@@ -83,7 +83,7 @@ class PageIdeeRecetteModel extends DBconnection
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
             $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            $qry = "SELECT * FROM recette";
+            $qry = "SELECT * FROM recette WHERE etat=1";
             $stmt = $dataBase->prepare($qry);
             $stmt->execute();
             $result = $stmt->fetchAll();
@@ -209,7 +209,7 @@ class PageIdeeRecetteModel extends DBconnection
                         WHEN 3 THEN nombreCalories BETWEEN 1000 AND 2000
                         WHEN 4 THEN nombreCalories > 2000
                     END
-                    ) ";
+                    ) AND etat=1 ";
             $stmt = $dataBase->prepare($qry);
             $stmt->execute([
                 "tprep" => $tprep,
