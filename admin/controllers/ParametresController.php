@@ -117,7 +117,7 @@ class ParametresController
         }
         $model = new ParametresModel();
         $model->modifierDiapo($idItem,$nom,$lien,$diapoImageName);
-        header("Location: ./parametres");
+        //header("Location: ./parametres");
     }
     public function getDiapoById($id){
         $model = new ParametresModel();

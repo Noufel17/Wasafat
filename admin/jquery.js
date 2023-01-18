@@ -210,4 +210,86 @@ $(function () {
       $("#recette").addClass("d-none");
     }
   });
+
+  // for added ingredients and steps on edit
+
+  $(".add-added-step-btn").on("click", function (e) {
+    e.preventDefault();
+    $("#etapes").prepend(`<div class="row row-cols-1 row-cols-md-3">
+    <div class="col-md-4 mb-3">
+        <input type="number" name="addedNumEtape[]" class="form-control" required
+            placeholder="numéro de l'étape">
+    </div>
+    <div class="col-md-12 mb-3">
+        <textarea name="addedDescriptionEtape[]" class="form-control" required
+            placeholder="description de l'étape"></textarea>
+    </div>
+    <div class="col-md-3 mb-3">
+        <button class="btn btn-danger remove-added-step-btn">
+            Supprimer Étape
+        </button>
+    </div>
+</div>`);
+  });
+  $(document).on("click", ".remove-added-step-btn", function (e) {
+    e.preventDefault();
+    $(this).parent().parent().remove();
+  });
+  // tableau d'ajout des ingredeints dans le formulaire d'ajout de recette
+  function getIngredients() {
+    $.ajax({
+      type: "POST",
+      url: "./getIngredients.php",
+      data: { action: "test" },
+      success: function (response) {
+        console.log(response);
+        var data = JSON.parse(response);
+        var options = "";
+        for (elem in data) {
+          console.log(elem);
+          options +=
+            "<option value=" +
+            data[elem].idIngredient +
+            ">" +
+            data[elem].nomIngredient +
+            "</option>";
+        }
+        var row =
+          `<div class="row row-cols-1 row-cols-lg-4 mb-3">
+        <div class="form-group col-md-4">
+            <select name="addedIdIngredient[]"
+                class="form-control" required placeholder="choisir un ingredient">
+                <option value="" selected>choisir ingrédient</option>
+                ` +
+          options +
+          `
+            </select>
+        </div>
+        <div class="col-md-3 mb-1">
+            <input type="number" name="addedQuantite[]" class="form-control" required
+                placeholder="quantité de l'ingrédient">
+        </div>
+        <div class="col-md-3 mb-1">
+            <input type="text" name="addedUnite[]" class="form-control" 
+                placeholder="unité de mesure">
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-danger remove-added-ing-btn">
+                Supprimer Ingrédient
+            </button>
+        </div>
+    </div>`;
+        $("#ingredients").append(row);
+      },
+    });
+  }
+
+  $(".add-added-ing-btn").on("click", function (e) {
+    e.preventDefault();
+    getIngredients();
+  });
+  $(document).on("click", ".remove-ing-btn", function (e) {
+    e.preventDefault();
+    $(this).parent().parent().remove();
+  });
 });

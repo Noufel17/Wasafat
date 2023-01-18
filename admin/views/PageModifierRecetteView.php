@@ -184,8 +184,7 @@ class PageModifierRecetteView extends GlobalView
                                 ?>
                         <div class="row row-cols-1 row-cols-lg-4 mb-3">
                             <div class="form-group col-md-3">
-                                <select name="idIngredient[]" class="form-control" required
-                                    placeholder="choisir un ingredient">
+                                <select name="idIngredient[]" class="form-control" placeholder="choisir un ingredient">
                                     <?php
                                             $controller = new GestionRecettesController();
                                             $ings = $controller->getIngredients();
@@ -198,8 +197,8 @@ class PageModifierRecetteView extends GlobalView
                                                 }else{
                                                     ?>
 
-                                    <option value="<?php echo $ingredient["idIngredient"] ?>">
-                                        <?php echo $ingredient["nomIngredient"] ?></option>
+                                    <option value="<?php echo $ing["idIngredient"] ?>">
+                                        <?php echo $ing["nomIngredient"] ?></option>
                                     <?php
                                                 }      
                                             }
@@ -207,7 +206,7 @@ class PageModifierRecetteView extends GlobalView
                                 </select>
                             </div>
                             <div class="col-md-3 mb-1">
-                                <input type="number" name="quantite[]" class="form-control" required
+                                <input type="number" name="quantite[]" class="form-control"
                                     placeholder="quantité de l'ingrédient"
                                     value="<?php echo $ingredient["quantiteIngredient"] ?>">
                             </div>
@@ -278,7 +277,7 @@ class PageModifierRecetteView extends GlobalView
                                     placeholder="unité de mesure">
                             </div>
                             <div class="col-md-3">
-                                <button type="button" class="btn btn-success add-ing-btn">
+                                <button type="button" class="btn btn-success add-added-ing-btn">
                                     Ajouter Ingrédient
                                 </button>
                             </div>
@@ -335,7 +334,7 @@ class PageModifierRecetteView extends GlobalView
                                     placeholder="description de l'étape"></textarea>
                             </div>
                             <div class="col-md-3">
-                                <button type="button" class="btn btn-success add-step-btn">
+                                <button type="button" class="btn btn-success add-added-step-btn">
                                     Ajouter Étape
                                 </button>
                             </div>

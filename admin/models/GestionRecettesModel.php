@@ -185,20 +185,23 @@ class GestionRecettesModel extends DBconnection
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
             $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            foreach ($numEtape as $key => $value) {
-                $qry = "DELETE FROM etape WHERE idEtape=:idEtape";
+            $qry = "DELETE FROM etape WHERE idRecette=:idRecette";
                 $stmt1 = $dataBase->prepare($qry);
                 $stmt1->execute([
-                    "idEtape" => $idEtape[$key]
+                    "idRecette" => $idRecette
                 ]);
-                $qry = "INSERT INTO etape (numEtape,descriptionEtape,idRecette) 
-                VALUES (:numEtape,:descriptionEtape,:idRecette)";
-                $stmt = $dataBase->prepare($qry);
-                $stmt->execute([
-                    "numEtape" => $value, "descriptionEtape" => $descriptionEtape[$key],
-                    "idRecette"=>$idRecette
-                ]);
-            }
+                if(($idEtape != NULL)>0){
+                    foreach ($numEtape as $key => $value) {
+                        
+                            $qry = "INSERT INTO etape (numEtape,descriptionEtape,idRecette) 
+                            VALUES (:numEtape,:descriptionEtape,:idRecette)";
+                            $stmt = $dataBase->prepare($qry);
+                            $stmt->execute([
+                                "numEtape" => $value, "descriptionEtape" => $descriptionEtape[$key],
+                                "idRecette"=>$idRecette
+                            ]);
+                    }
+                }   
             $this->disconnect($dataBase);
         } catch (Exception $e) {
             echo 'Exception -> ';
@@ -213,21 +216,27 @@ class GestionRecettesModel extends DBconnection
     ) {
         try {
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
-            foreach ($idIngredient as $key => $value) {
-                $qry = "DELETE FROM secompose 
-                    WHERE idIngredient=:idIngredient AND idRecette =:idRecette";
+            $qry = "DELETE FROM secompose 
+                    WHERE idRecette =:idRecette";
                 $stmt1 = $dataBase->prepare($qry);
                 $stmt1->execute([
-                 "idIngredient" => $value,"idRecette"=>$idRecette
+                 "idRecette"=>$idRecette
                 ]);
-                $qry = "INSERT INTO secompose INSERT INTO secompose (idRecette,idIngredient,quantiteIngredient,unite) 
-                VALUES (:idRecette,:idIngredient,:quantite,:unite)";
-                $stmt2 = $dataBase->prepare($qry);
-                $stmt2->execute([
-                 "idIngredient" => $value,
-                    "quantite" => $quantite[$key], "unite" => $unite[$key],"idRecette"=>$idRecette
-                ]);
-            }
+
+                if(($idIngredient != NULL) >0){
+                    foreach ($idIngredient as $key => $value) {
+
+                        $qry = "INSERT INTO secompose (idRecette,idIngredient,quantiteIngredient,unite) 
+                            VALUES (:idRecette,:idIngredient,:quantite,:unite)";
+                        $stmt2 = $dataBase->prepare($qry);
+                        $stmt2->execute([
+                            "idIngredient" => $value,
+                            "quantite" => $quantite[$key],
+                            "unite" => $unite[$key],
+                            "idRecette" => $idRecette
+                        ]);
+                }
+                }
             $this->disconnect($dataBase);
         } catch (Exception $e) {
             echo 'Exception -> ';
@@ -265,6 +274,7 @@ class GestionRecettesModel extends DBconnection
         $unite
     ) {
         try {
+            
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
             foreach ($idIngredient as $key => $value) {
                 $qry = "INSERT INTO secompose (idRecette,idIngredient,quantiteIngredient,unite) 
@@ -319,7 +329,7 @@ class GestionRecettesModel extends DBconnection
         // echo $descriptionRecette;
         // echo $calories;
         // echo $idFete;
-        // print_r($idIngredient);
+        //print_r($idIngredient);
         // print_r($quantite);
         // print_r($unite);
         // print_r($numEtape);
@@ -330,7 +340,6 @@ class GestionRecettesModel extends DBconnection
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
             $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            // cas trivial il faut faire 4 cas par rapport au image name et video name
             if($recetteImageName != NULL && $recetteVideoName != NULL){
                 $qry = "UPDATE recette SET nomRecette=:nom,tempsPreparation=:tprepa,TempsCuission=:tcuiss,TempsRepos=:tropos,nombreCalories=:calories,difficulte=:difficulte,categorie=:category,recetteImage=:recetteImageName,
                 recetteVideo=:recetteVideoName,healthy=:healthy,description=:descriptionRecette,idFete=:idFete,etat=:etat  WHERE idRecette=:idRecette";
