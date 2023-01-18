@@ -21,6 +21,10 @@ if (isset($_GET['idUser'])) {
     $idUser = $_GET['idUser'];
     $request = explode('?', $request)[0];
 }
+if (isset($_GET['idDiapo'])) {
+    $idDiapo = $_GET['idDiapo'];
+    $request = explode('?', $request)[0];
+}
 switch ($request) {
     case "/Projet_tdw/admin/":
         $controller = new PageLoginController();
@@ -61,21 +65,29 @@ switch ($request) {
     case '/Projet_tdw/admin/ajouter-news':
         $controller = new GestionNewsController();
         $controller->afficherPageAjoutNews();
-        break;  
+        break;
     case '/Projet_tdw/admin/gestion-users':
         $controller = new GestionUsersController();
         $controller->afficherGestionUsers();
-        break;       
+        break;
     case '/Projet_tdw/admin/gestion-nutrition':
         $controller = new GestionNutritionController();
         $controller->afficherGestionNutrition();
-        break; 
+        break;
     case '/Projet_tdw/admin/parametres':
         $controller = new ParametresController();
         $controller->afficherParametres();
-        break; 
+        break;
     case '/Projet_tdw/admin/profile':
         $controller = new GestionUsersController();
         $controller->afficherPageProfile($idUser);
+        break;
+    case '/Projet_tdw/admin/ajouter-diapo':
+        $controller = new ParametresController();
+        $controller->afficherPageAjoutDiapo();
+        break;
+    case '/Projet_tdw/admin/modifier-diapo':
+        $controller = new ParametresController();
+        $controller->afficherPageModifierDiapo($idDiapo);
         break;
 }

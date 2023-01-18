@@ -182,8 +182,8 @@ class PageModifierRecetteView extends GlobalView
                         <?php
                             foreach($ingredients as $ingredient){
                                 ?>
-                        <div class="row row-cols-1 row-cols-lg-3 mb-3">
-                            <div class="form-group col-md-4">
+                        <div class="row row-cols-1 row-cols-lg-4 mb-3">
+                            <div class="form-group col-md-3">
                                 <select name="idIngredient[]" class="form-control" required
                                     placeholder="choisir un ingredient">
                                     <?php
@@ -214,6 +214,11 @@ class PageModifierRecetteView extends GlobalView
                             <div class="col-md-3 mb-1">
                                 <input type="text" name="unite[]" class="form-control" placeholder="unité de mesure"
                                     value="<?php echo $ingredient["unite"] ?>">
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <button type="button" class="btn btn-danger remove-ing-btn">
+                                    Supprimer Ingrédient
+                                </button>
                             </div>
                             <?php
                             if($ingredient["idIngredient"]==end($ingredients)["idIngredient"]){
@@ -290,7 +295,7 @@ class PageModifierRecetteView extends GlobalView
                         <?php
                         foreach($steps as $step){
                             ?>
-                        <div class="row row-cols-1 row-cols-md-3 mb-5">
+                        <div class="row row-cols-1 row-cols-lg-3 mb-5">
                             <input type="hidden" name="idEtape[]" value="<?php echo $step["idEtape"] ?>">
                             <div class="col-md-4 mb-3">
                                 <input type="number" name="numEtape[]" class="form-control" required
@@ -320,6 +325,11 @@ class PageModifierRecetteView extends GlobalView
                             <?php
                             }
                             ?>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-danger remove-step-btn">
+                                Supprimer Étape
+                            </button>
                         </div>
                         <?php
                         }

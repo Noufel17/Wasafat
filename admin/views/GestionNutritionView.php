@@ -7,7 +7,7 @@ class GestionNutritionView extends GlobalView
     public function content()
     {
     }
-    public function afficherNutritionRecettes()
+    public function afficherGestionNutrition()
     {
         $this->head();
         $this->header();

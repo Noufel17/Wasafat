@@ -50,3 +50,15 @@ if (isset($_POST['valider-user'])) {
     $controller = new GestionUsersController();
     $controller->validerUser($idUser);
 }
+if (isset($_POST['ajouter-diapo'])) {
+    $controller = new ParametresController();
+    $controller->ajouterDiapo();
+}
+if (isset($_POST['supprimer-diapo'])) {
+    $controller = new ParametresController();
+    $controller->supprimerDiapo();
+}
+if (isset($_POST['modifier-diapo'])) {
+    $controller = new ParametresController();
+    $controller->modifierDiapo();
+}

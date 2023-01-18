@@ -401,6 +401,18 @@ class GestionRecettesModel extends DBconnection
             $qry = "DELETE FROM recette WHERE idRecette=:idRecette";
             $stmt = $dataBase->prepare($qry);
             $stmt->execute(["idRecette"=>$idRecette]);
+            $qry2 = "DELETE FROM secompose WHERE idRecette=:idRecette";
+            $stmt2 = $dataBase->prepare($qry2);
+            $stmt2->execute(["idRecette"=>$idRecette]);
+            $qry3 = "DELETE FROM etape WHERE idRecette=:idRecette";
+            $stmt3 = $dataBase->prepare($qry3);
+            $stmt3->execute(["idRecette"=>$idRecette]);
+            $qry4 = "DELETE FROM recettescrees WHERE idRecette=:idRecette";
+            $stmt4 = $dataBase->prepare($qry4);
+            $stmt4->execute(["idRecette"=>$idRecette]);
+            $qry5= "DELETE FROM recettesFavories WHERE idRecette=:idRecette";
+            $stmt5 = $dataBase->prepare($qry5);
+            $stmt5->execute(["idRecette"=>$idRecette]);
             $this->disconnect($dataBase);
         } catch (Exception $e) {
             echo 'Exception -> ';

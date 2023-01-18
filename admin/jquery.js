@@ -198,4 +198,16 @@ $(function () {
     e.preventDefault();
     $(this).parent().parent().remove();
   });
+
+  $("input[name$='radio']").on("click", function (e) {
+    var val = $(this).val();
+    if (val === "recette") {
+      $("#recette").removeClass("d-none");
+      $("#news").addClass("d-none");
+    }
+    if (val === "news") {
+      $("#news").removeClass("d-none");
+      $("#recette").addClass("d-none");
+    }
+  });
 });
