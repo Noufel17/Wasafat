@@ -178,19 +178,25 @@ class GestionRecettesModel extends DBconnection
     public function modifierEtapes(
         $numEtape,
         $descriptionEtape,
-        $idEtape
+        $idEtape,
+        $idRecette
     ) {
         try {
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
             $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             foreach ($numEtape as $key => $value) {
-                $qry = "UPDATE etape SET numEtape=:numEtape,DescriptionEtape=:descriptionEtape 
-                 WHERE idEtape=:idEtape";
+                $qry = "DELETE FROM etape WHERE idEtape=:idEtape";
+                $stmt1 = $dataBase->prepare($qry);
+                $stmt1->execute([
+                    "idEtape" => $idEtape[$key]
+                ]);
+                $qry = "INSERT INTO etape (numEtape,descriptionEtape,idRecette) 
+                VALUES (:numEtape,:descriptionEtape,:idRecette)";
                 $stmt = $dataBase->prepare($qry);
                 $stmt->execute([
                     "numEtape" => $value, "descriptionEtape" => $descriptionEtape[$key],
-                    "idEtape" => $idEtape[$key]
+                    "idRecette"=>$idRecette
                 ]);
             }
             $this->disconnect($dataBase);
@@ -200,6 +206,7 @@ class GestionRecettesModel extends DBconnection
         }
     }
     public function modifierSecompose(
+        $idRecette,
         $idIngredient,
         $quantite,
         $unite
@@ -207,12 +214,18 @@ class GestionRecettesModel extends DBconnection
         try {
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
             foreach ($idIngredient as $key => $value) {
-                $qry = "UPDATE SET secompose quantiteIngredient=:quantite,unite=:unite 
-                    WHERE idIngredient=:idIngredient";
-                $stmt = $dataBase->prepare($qry);
-                $stmt->execute([
+                $qry = "DELETE FROM secompose 
+                    WHERE idIngredient=:idIngredient AND idRecette =:idRecette";
+                $stmt1 = $dataBase->prepare($qry);
+                $stmt1->execute([
+                 "idIngredient" => $value,"idRecette"=>$idRecette
+                ]);
+                $qry = "INSERT INTO secompose INSERT INTO secompose (idRecette,idIngredient,quantiteIngredient,unite) 
+                VALUES (:idRecette,:idIngredient,:quantite,:unite)";
+                $stmt2 = $dataBase->prepare($qry);
+                $stmt2->execute([
                  "idIngredient" => $value,
-                    "quantite" => $quantite[$key], "unite" => $unite[$key]
+                    "quantite" => $quantite[$key], "unite" => $unite[$key],"idRecette"=>$idRecette
                 ]);
             }
             $this->disconnect($dataBase);
@@ -233,8 +246,8 @@ class GestionRecettesModel extends DBconnection
             foreach ($numEtape as $key => $value) {
                 $qry = "INSERT INTO etape (numEtape,descriptionEtape,idRecette) 
                 VALUES (:numEtape,:descriptionEtape,:idRecette)";
-                $stmt = $dataBase->prepare($qry);
-                $stmt->execute([
+                $stmt2 = $dataBase->prepare($qry);
+                $stmt2->execute([
                     "numEtape" => $value, "descriptionEtape" => $descriptionEtape[$key],
                     "idRecette" => $idRecette
                 ]);
@@ -364,9 +377,12 @@ class GestionRecettesModel extends DBconnection
             $this->modifierEtapes(
                 $numEtape,
                 $descriptionEtape,
-                $idEtape
+                $idEtape,
+                $idRecette
+
             );
             $this->modifierSecompose(
+                $idRecette,
                 $idIngredient,
                 $quantite,
                 $unite

@@ -295,7 +295,7 @@ class PageModifierRecetteView extends GlobalView
                         <?php
                         foreach($steps as $step){
                             ?>
-                        <div class="row row-cols-1 row-cols-lg-3 mb-5">
+                        <div class="row row-cols-1 row-cols-md-3 mb-5">
                             <input type="hidden" name="idEtape[]" value="<?php echo $step["idEtape"] ?>">
                             <div class="col-md-4 mb-3">
                                 <input type="number" name="numEtape[]" class="form-control" required
@@ -306,31 +306,13 @@ class PageModifierRecetteView extends GlobalView
                                     placeholder="description de l'étape" style="height:100px;overflow-wrap:break-word"
                                     value="<?php echo $step["DescriptionEtape"] ?>"></input>
                             </div>
-                            <?php
-                            if($step["idEtape"]==end($steps)["idEtape"]){
-                                ?>
-                            <!-- <div class="col-md-3">
-                                <button type="button" class="btn btn-success add-step-btn">
-                                    Ajouter Étape
-                                </button>
-                            </div> -->
-                            <?php
-                            }else{
-                                ?>
-                            <!-- <div class="col-md-3">
+                            <div class="col-md-3">
                                 <button type="button" class="btn btn-danger remove-step-btn">
                                     Supprimer Étape
                                 </button>
-                            </div> -->
-                            <?php
-                            }
-                            ?>
+                            </div>
                         </div>
-                        <div class="col-md-3">
-                            <button type="button" class="btn btn-danger remove-step-btn">
-                                Supprimer Étape
-                            </button>
-                        </div>
+
                         <?php
                         }
                         ?>

@@ -26,9 +26,9 @@ class PageModifierProfileController
                 // wait untill file is uploaded
             }
             if (in_array($profileImageExt, array('jpg', 'jpeg', 'png'))) {
-                $imageDest = "public/images/profile/" . $profileImage["name"];
+                $imageDest = "../public/images/profile/" . $profileImage["name"];
                 move_uploaded_file($tmpImage, $imageDest);
-                unlink("public/images/profile" . $_POST["oldImage"]);
+                unlink("../public/images/profile" . $_POST["oldImage"]);
                 $profileImageName = "/" . $profileImageName;
             }
         } else {
