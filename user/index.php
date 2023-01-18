@@ -92,10 +92,6 @@ switch ($request) {
         $controller = new PageNutritionController();
         $controller->afficherPageNutrition();
         break;
-    case '/Projet_tdw/user/ingredient':
-        $controller = new PageIngredientController();
-        $controller->afficherPageIngredient($idIngredient);
-        break;
     case '/Projet_tdw/user/login':
         $controller = new PageLoginController();
         $controller->afficherPageLogin();

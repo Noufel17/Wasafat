@@ -7,6 +7,7 @@ require_once "./controllers/GestionNewsController.php";
 require_once "./controllers/GestionNutritionController.php";
 require_once "./controllers/GestionUsersController.php";
 require_once "./controllers/ParametresController.php";
+require_once "./controllers/MessagesController.php";
 session_start();
 $request = $_SERVER['REQUEST_URI'];
 if (isset($_GET['idRecette'])) {
@@ -101,5 +102,9 @@ switch ($request) {
     case '/Projet_tdw/admin/modifier-ingredient':
         $controller = new GestionNutritionController();
         $controller->afficherPageModifierIngredient($idIngredient);
+        break;
+    case '/Projet_tdw/admin/messages':
+        $controller = new MessagesController();
+        $controller->afficherMessages();
         break;
 }
