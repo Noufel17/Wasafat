@@ -14,21 +14,13 @@ class PageSaisonModel extends DBconnection
             MAX(count) AS COUNT,idRecette,saisonNaturelle
         FROM
             (
-            SELECT
-                saisonNaturelle,COUNT(i.saisonNaturelle) AS COUNT,r.idRecette
-            FROM
-                secompose s
-            LEFT OUTER JOIN ingredient i ON
-                s.idIngredient = i.idIngredient
-            LEFT OUTER JOIN recette r ON
-                r.idRecette = s.idRecette
-            GROUP BY
-                r.idRecette,
-                i.saisonNaturelle
-            HAVING
-                saisonNaturelle != 'partout'
-        ) AS Table1
-        GROUP BY idRecette ) AS Table2
+                SELECT saisonNaturelle,COUNT(i.saisonNaturelle) AS COUNT,r.idRecette
+                FROM secompose s
+                LEFT OUTER JOIN ingredient i ON s.idIngredient = i.idIngredient
+                LEFT OUTER JOIN recette r ON r.idRecette = s.idRecette
+                GROUP BY r.idRecette, i.saisonNaturelle
+                HAVING saisonNaturelle != 'partout'
+            ) AS Table1 GROUP BY idRecette ) AS Table2
     JOIN recette on recette.idRecette = Table2.idRecette WHERE saisonNaturelle=:saison AND etat=1";
         $stmt = $dataBase->prepare($qry);
         $stmt->execute(['saison' => $saison]);

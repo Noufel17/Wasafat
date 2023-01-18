@@ -161,11 +161,11 @@ nav {
   color: black;
 }
 .simple-media-container {
-  height: 600px;
   width: 80%;
   border-radius: 20px !important;
   margin-top: 32px !important;
   margin-bottom: 32px !important;
+  max-height: 720px !important;
 }
 .media-container {
   position: relative;

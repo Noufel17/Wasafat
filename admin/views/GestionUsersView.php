@@ -45,38 +45,40 @@ class GestionUsersView extends GlobalView
                         <td><?php echo $user["email"] ?></td>
                         <td><?php echo $user["dateNaissance"] ?></td>
                         <td><?php echo $user["sexe"] ?></td>
-                        <td class="d-flex flex-row justify-content-center align-items-center">
-                            <a href="<?php echo "./profile?idUser=".$user["idUtilisateur"] ?>"
-                                style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
-                                data-placement="bottom" title="voir détaills">
-                                <i class="fa-sharp fa-solid fa-eye color m-auto"></i>
-                            </a>
-                            <?php 
+                        <td>
+                            <div class="d-flex flex-row justify-content-center align-items-center">
+                                <a href="<?php echo "./profile?idUser=".$user["idUtilisateur"] ?>"
+                                    style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
+                                    data-placement="bottom" title="voir détaills">
+                                    <i class="fa-sharp fa-solid fa-eye color m-auto"></i>
+                                </a>
+                                <?php 
                                 if($user["valide"]==0){
                                     ?>
-                            <form action="./redirect.php" method="post" class="mb-0">
-                                <input type="hidden" name="idUser" value="<?php echo $user["idUtilisateur"] ?>">
-                                <button type="submit" name="valider-user" class="btn-d-none" data-toggle="tooltip"
-                                    data-placement="bottom" title="valider inscription">
-                                    <i class="fa-solid fa-check color m-auto"></i>
-                                </button>
-                            </form>
-                            <?php
+                                <form action="./redirect.php" method="post" class="mb-0">
+                                    <input type="hidden" name="idUser" value="<?php echo $user["idUtilisateur"] ?>">
+                                    <button type="submit" name="valider-user" class="btn-d-none" data-toggle="tooltip"
+                                        data-placement="bottom" title="valider inscription">
+                                        <i class="fa-solid fa-check color m-auto"></i>
+                                    </button>
+                                </form>
+                                <?php
                                 }
                             ?>
-                            <?php 
+                                <?php 
                                 if($user["valide"]==1){
                                     ?>
-                            <form action="./redirect.php" method="post" class="mb-0">
-                                <input type="hidden" name="idUser" value="<?php echo $user["idUtilisateur"] ?>">
-                                <button type="submit" name="banner-user" class="btn-d-none" data-toggle="tooltip"
-                                    data-placement="bottom" title="banner utilisateur">
-                                    <i class="fa-solid fa-ban color m-auto"></i>
-                                </button>
-                            </form>
-                            <?php
+                                <form action="./redirect.php" method="post" class="mb-0">
+                                    <input type="hidden" name="idUser" value="<?php echo $user["idUtilisateur"] ?>">
+                                    <button type="submit" name="banner-user" class="btn-d-none" data-toggle="tooltip"
+                                        data-placement="bottom" title="banner utilisateur">
+                                        <i class="fa-solid fa-ban color m-auto"></i>
+                                    </button>
+                                </form>
+                                <?php
                             }
                             ?>
+                            </div>
                         </td>
                     </tr>
                     <?php

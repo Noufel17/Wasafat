@@ -25,6 +25,10 @@ if (isset($_GET['idDiapo'])) {
     $idDiapo = $_GET['idDiapo'];
     $request = explode('?', $request)[0];
 }
+if (isset($_GET['idIngredient'])) {
+    $idIngredient = $_GET['idIngredient'];
+    $request = explode('?', $request)[0];
+}
 switch ($request) {
     case "/Projet_tdw/admin/":
         $controller = new PageLoginController();
@@ -89,5 +93,13 @@ switch ($request) {
     case '/Projet_tdw/admin/modifier-diapo':
         $controller = new ParametresController();
         $controller->afficherPageModifierDiapo($idDiapo);
+        break;
+    case '/Projet_tdw/admin/ajouter-ingredient':
+        $controller = new GestionNutritionController();
+        $controller->afficherPageAjoutIngredient();
+        break;
+    case '/Projet_tdw/admin/modifier-ingredient':
+        $controller = new GestionNutritionController();
+        $controller->afficherPageModifierIngredient($idIngredient);
         break;
 }

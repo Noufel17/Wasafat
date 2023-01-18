@@ -25,7 +25,9 @@ class PageNutritionView extends GlobalView
                         $ingredient["idIngredient"],
                         $ingredient["nomIngredient"],
                         $ingredient["healthy"],
-                        $ingredient["saisonNaturelle"]
+                        $ingredient["proportionHealthy"],
+                        $ingredient["saisonNaturelle"],
+                        $ingredient["calories"]
                     );
                     ?>
     </div>

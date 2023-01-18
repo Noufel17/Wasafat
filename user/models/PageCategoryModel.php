@@ -24,34 +24,20 @@ class PageCategoryModel extends DBconnection
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
             $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            $qry = "SELECT 
-                Table2.idRecette,recette.nomRecette,recette.recetteImage,recette.description,recette.tempsPreparation,
-                recette.nombreCalories,recette.tempsCuission,recette.tempsRepos,recette.recetteVideo,recette.difficulte,
-                recette.etat,categorie,table3.notation, recette.tempsPreparation+
-                recette.tempsCuission+recette.tempsRepos AS tempsTotal,
+            $qry = "SELECT Table2.idRecette,recette.nomRecette,recette.recetteImage,recette.description,recette.tempsPreparation,recette.nombreCalories,recette.tempsCuission,recette.tempsRepos,recette.recetteVideo,recette.difficulte,recette.etat,categorie,table3.notation, recette.tempsPreparation+recette.tempsCuission+recette.tempsRepos AS tempsTotal,
                 (CASE WHEN COUNT = 0 THEN NULL ELSE saisonNaturelle END) AS saisonNaturelle
             FROM (
                 SELECT
                     MAX(count) AS COUNT,idRecette,saisonNaturelle
-                FROM
-                    (
+                FROM (
                     SELECT
-                        saisonNaturelle,COUNT(i.saisonNaturelle) AS COUNT,r.idRecette
-                    FROM
-                        secompose s
-                    LEFT OUTER JOIN ingredient i ON
-                        s.idIngredient = i.idIngredient
-                    LEFT OUTER JOIN recette r ON
-                        r.idRecette = s.idRecette
-                    GROUP BY
-                        r.idRecette,
-                        i.saisonNaturelle
-                ) AS Table1
-                GROUP BY idRecette ) AS Table2
+                        saisonNaturelle,COUNT(i.saisonNaturelle) AS COUNT,r.idRecette FROM
+                        secompose s LEFT OUTER JOIN ingredient i ON s.idIngredient = i.idIngredient
+                    LEFT OUTER JOIN recette r ON r.idRecette = s.idRecette GROUP BY r.idRecette, i.saisonNaturelle
+                ) AS Table1 GROUP BY idRecette ) AS Table2
             JOIN recette on recette.idRecette = Table2.idRecette LEFT OUTER JOIN (
                 SELECT idRecette,AVG(note) AS notation FROM notation GROUP BY idRecette
             ) table3 ON table3.idRecette = Table2.idRecette
-
              HAVING (CASE :tprep 
                     WHEN -1 THEN TRUE 
                     WHEN 1 THEN tempsPreparation BETWEEN 10 AND 30

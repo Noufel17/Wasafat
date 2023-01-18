@@ -43,19 +43,21 @@ class ParametresView extends GlobalView
                         <td><img src="<?php echo $diapoItem["diapoImage"] ?>" alt="" height="100px" width="200px"
                                 style="object-fit:cover"></td>
                         <td><?php echo $diapoItem["nomItem"]?></td>
-                        <td class="d-flex flex-row justify-content-center align-items-center">
-                            <a href="<?php echo "./modifier-diapo?idDiapo=".$diapoItem["idItem"] ?>"
-                                style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
-                                data-placement="bottom" title="modifier diapo">
-                                <i class="fa-solid fa-pen-to-square color m-auto"></i>
-                            </a>
-                            <form action="./redirect.php" method="post" class="mb-0">
-                                <input type="hidden" name="idItem" value="<?php echo $diapoItem["idItem"] ?>">
-                                <button type="submit" name="supprimer-diapo" class="btn-d-none" data-toggle="tooltip"
-                                    data-placement="bottom" title="supprimer diapo">
-                                    <i class="fa-solid fa-trash color m-auto"></i>
-                                </button>
-                            </form>
+                        <td>
+                            <div class="d-flex flex-row justify-content-center align-items-center">
+                                <a href="<?php echo "./modifier-diapo?idDiapo=".$diapoItem["idItem"] ?>"
+                                    style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
+                                    data-placement="bottom" title="modifier diapo">
+                                    <i class="fa-solid fa-pen-to-square color m-auto"></i>
+                                </a>
+                                <form action="./redirect.php" method="post" class="mb-0">
+                                    <input type="hidden" name="idItem" value="<?php echo $diapoItem["idItem"] ?>">
+                                    <button type="submit" name="supprimer-diapo" class="btn-d-none"
+                                        data-toggle="tooltip" data-placement="bottom" title="supprimer diapo">
+                                        <i class="fa-solid fa-trash color m-auto"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     <?php

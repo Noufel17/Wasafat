@@ -34,12 +34,12 @@ class Components
 </div>
 <?php
     }
-    public function cardIngredient($id, $nom, $healthy, $saison)
+    public function cardIngredient($id, $nom, $healthy,$proportionHealthy,$saison,$calories)
     {
     ?>
 <div class="card card-style shadow m-auto" style="width:274px;">
     <div class="card-header">
-        <h5 style="font-weight:bold"><?php echo $nom ?></h5>
+        <h3 style="font-weight:bold"><?php echo $nom ?></h3>
     </div>
     <div class="card-body">
         <?php
@@ -48,19 +48,28 @@ class Components
         <div class="d-flex flex-row justify-content-start align-items-center gap-2">
             <img src="../public/icons/healthy" alt="" width="40px" height="40px">
             <h3>Healthy</h3>
-        </div>
+            <?php
+            if($proportionHealthy !=NULL){
+                ?>
+            <h5><?php echo "à " . $proportionHealthy * 100 . " %" ?></h5>
+            <?php
+            }
+            ?>
 
+        </div>
         <?php
                 } else {
                 ?>
         <?php
                 }
                 ?>
-        <h5><?php echo "Saison Naturelle: " . $saison ?></h5>
-        <center>
-            <a href="<?php echo "/Projet_tdw/user/ingredient?idIngredient=" . strtolower($id) ?>"
-                class="action-btn">Détaille</a>
-        </center>
+        <h5><b>Saison Naturelle:</b> <?php echo ucfirst($saison) ?></h5>
+        <?php if($calories != NULL){
+            ?>
+        <h5><b>Calories: </b><?php echo $calories . " cal/100g" ?></h5>
+        <?php
+        } ?>
+
     </div>
 </div>
 <?php

@@ -116,8 +116,9 @@ class Components
         if (isset($lienVideo)) {
         ?>
 
-<div class="simple-media-container m-auto overflow-hidden">
-    <video width="100%" src="<?php echo "../public/videos/recettes" . $lienVideo ?>" controles muted></video>
+<div class="simple-media-container mx-auto">
+    <video width=" 100%" style="border-radius:20px" src="<?php echo "../public/videos/recettes" . $lienVideo ?>"
+        controls muted></video>
 </div>
 <?php
         }

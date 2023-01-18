@@ -50,7 +50,7 @@ class PageAccueilView extends GlobalView
         <a href="./gestion-nutrition" class="admin-link">
             <div class="media-container m-auto overflow-hidden shadow-lg">
 
-                <img src="../public/admin/admin1" alt="" height="100%" width="100%" style="object-fit:cover">
+                <img src="../public/admin/nutrition" alt="" height="100%" width="100%" style="object-fit:cover">
                 <h1 class="centered">Gestion des nutritions</h1>
 
             </div>
@@ -64,6 +64,16 @@ class PageAccueilView extends GlobalView
 
                 <img src="../public/admin/settings" alt="" height="100%" width="100%" style="object-fit:cover">
                 <h1 class="centered">Pramétres</h1>
+
+            </div>
+        </a>
+    </div>
+    <div class="col">
+        <a href="./messages" class="admin-link">
+            <div class="media-container m-auto overflow-hidden shadow-lg">
+
+                <img src="../public/admin/messages" alt="" height="100%" width="100%" style="object-fit:cover">
+                <h1 class="centered">Messages</h1>
 
             </div>
         </a>

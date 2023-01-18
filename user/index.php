@@ -8,7 +8,6 @@ require_once "./controllers/PageHealthyController.php";
 require_once "./controllers/PageFeteController.php";
 require_once "./controllers/PageSaisonController.php";
 require_once "./controllers/PageNutritionController.php";
-require_once "./controllers/PageIngredientController.php";
 require_once "./controllers/PageLoginController.php";
 require_once "./controllers/PageRegisterController.php";
 require_once "./controllers/PageProfileController.php";

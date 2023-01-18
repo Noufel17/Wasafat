@@ -42,24 +42,26 @@ class GestionNewsView extends GlobalView
                     <tr>
                         <td><?php echo $new["titre"] ?></td>
                         <td><?php echo  str_replace("$"," ",substr($new["corps"], 0, 300) . "...") ?></td>
-                        <td class="d-flex flex-row justify-content-center align-items-center">
-                            <a href="<?php echo "./news?idNews=".$new["idNews"] ?>"
-                                style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
-                                data-placement="bottom" title="voir détaills">
-                                <i class="fa-sharp fa-solid fa-eye color m-auto"></i>
-                            </a>
-                            <a href="<?php echo "./modifier-news?idNews=".$new["idNews"] ?>"
-                                style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
-                                data-placement="bottom" title="modifier news">
-                                <i class="fa-solid fa-pen-to-square color m-auto"></i>
-                            </a>
-                            <form action="./redirect.php" method="post" class="mb-0">
-                                <input type="hidden" name="idNews" value="<?php echo $new["idNews"] ?>">
-                                <button type="submit" name="supprimer-news" class="btn-d-none" data-toggle="tooltip"
-                                    data-placement="bottom" title="supprimer news">
-                                    <i class="fa-solid fa-trash color m-auto"></i>
-                                </button>
-                            </form>
+                        <td>
+                            <div class="d-flex flex-row justify-content-center align-items-center">
+                                <a href="<?php echo "./news?idNews=".$new["idNews"] ?>"
+                                    style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
+                                    data-placement="bottom" title="voir détaills">
+                                    <i class="fa-sharp fa-solid fa-eye color m-auto"></i>
+                                </a>
+                                <a href="<?php echo "./modifier-news?idNews=".$new["idNews"] ?>"
+                                    style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
+                                    data-placement="bottom" title="modifier news">
+                                    <i class="fa-solid fa-pen-to-square color m-auto"></i>
+                                </a>
+                                <form action="./redirect.php" method="post" class="mb-0">
+                                    <input type="hidden" name="idNews" value="<?php echo $new["idNews"] ?>">
+                                    <button type="submit" name="supprimer-news" class="btn-d-none" data-toggle="tooltip"
+                                        data-placement="bottom" title="supprimer news">
+                                        <i class="fa-solid fa-trash color m-auto"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     <?php

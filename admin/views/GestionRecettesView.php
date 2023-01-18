@@ -57,37 +57,39 @@ class GestionRecettesView extends GlobalView
                         } else
                             echo "0/5";  ?></td>
                         <td><?php echo $recette["saisonNaturelle"] ?></td>
-                        <td class="d-flex flex-row justify-content-center align-items-center">
-                            <a href="<?php echo "./recette?idRecette=".$recette["idRecette"] ?>"
-                                style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
-                                data-placement="bottom" title="voir détaills">
-                                <i class="fa-sharp fa-solid fa-eye color m-auto"></i>
-                            </a>
-                            <a href="<?php echo "./modifier-recette?idRecette=".$recette["idRecette"] ?>"
-                                style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
-                                data-placement="bottom" title="modifier">
-                                <i class="fa-solid fa-pen-to-square color m-auto"></i>
-                            </a>
-                            <form action="./redirect.php" method="post" class="mb-0">
-                                <input type="hidden" name="idRecette" value="<?php echo $recette["idRecette"] ?>">
-                                <button type="submit" name="supprimer-recette" class="btn-d-none" data-toggle="tooltip"
-                                    data-placement="bottom" title="supprimer recette">
-                                    <i class="fa-solid fa-trash color m-auto"></i>
-                                </button>
-                            </form>
-                            <?php 
+                        <td>
+                            <div class="d-flex flex-row justify-content-center align-items-center">
+                                <a href="<?php echo "./recette?idRecette=".$recette["idRecette"] ?>"
+                                    style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
+                                    data-placement="bottom" title="voir détaills">
+                                    <i class="fa-sharp fa-solid fa-eye color m-auto"></i>
+                                </a>
+                                <a href="<?php echo "./modifier-recette?idRecette=".$recette["idRecette"] ?>"
+                                    style="text-decoration: none;padding:1px 6px;" data-toggle="tooltip"
+                                    data-placement="bottom" title="modifier">
+                                    <i class="fa-solid fa-pen-to-square color m-auto"></i>
+                                </a>
+                                <form action="./redirect.php" method="post" class="mb-0">
+                                    <input type="hidden" name="idRecette" value="<?php echo $recette["idRecette"] ?>">
+                                    <button type="submit" name="supprimer-recette" class="btn-d-none"
+                                        data-toggle="tooltip" data-placement="bottom" title="supprimer recette">
+                                        <i class="fa-solid fa-trash color m-auto"></i>
+                                    </button>
+                                </form>
+                                <?php 
                                 if($recette["etat"]==0){
                                     ?>
-                            <form action="./redirect.php" method="post" class="mb-0">
-                                <input type="hidden" name="idRecette" value="<?php echo $recette["idRecette"] ?>">
-                                <button type="submit" name="valider-recette" class="btn-d-none" data-toggle="tooltip"
-                                    data-placement="bottom" title="valider recette">
-                                    <i class="fa-solid fa-check color m-auto"></i>
-                                </button>
-                            </form>
-                            <?php
+                                <form action="./redirect.php" method="post" class="mb-0">
+                                    <input type="hidden" name="idRecette" value="<?php echo $recette["idRecette"] ?>">
+                                    <button type="submit" name="valider-recette" class="btn-d-none"
+                                        data-toggle="tooltip" data-placement="bottom" title="valider recette">
+                                        <i class="fa-solid fa-check color m-auto"></i>
+                                    </button>
+                                </form>
+                                <?php
                                 }
                             ?>
+                            </div>
                         </td>
                     </tr>
                     <?php

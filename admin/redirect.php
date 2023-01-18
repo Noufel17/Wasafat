@@ -62,3 +62,15 @@ if (isset($_POST['modifier-diapo'])) {
     $controller = new ParametresController();
     $controller->modifierDiapo();
 }
+if (isset($_POST['ajout-ingredient'])) {
+    $controller = new GestionNutritionController();
+    $controller->ajouterIngredient();
+}
+if (isset($_POST['supprimer-ingredient'])) {
+    $controller = new GestionNutritionController();
+    $controller->supprimerIngredient();
+}
+if (isset($_POST['modifier-ingredient'])) {
+    $controller = new GestionNutritionController();
+    $controller->modifierIngredient();
+}
