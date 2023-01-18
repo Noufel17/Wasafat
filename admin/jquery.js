@@ -189,7 +189,7 @@ $(function () {
     </div>
     <div class="col md-cols-4">
         <button type="button" class="btn btn-danger remove-img-btn">
-            Supprimer une image
+            Supprimer image
         </button>
     </div>
 </div>`);
@@ -289,6 +289,41 @@ $(function () {
     getIngredients();
   });
   $(document).on("click", ".remove-ing-btn", function (e) {
+    e.preventDefault();
+    $(this).parent().parent().remove();
+  });
+
+  // pour la modification de news
+  $(".add-added-para-btn").on("click", function (e) {
+    e.preventDefault();
+    $("#added-para").append(`<div class="col-md-12 mb-3">
+    <textarea name="addedParagraph[]" class="form-control" style="height:200px"
+        placeholder="Paragraph"></textarea>
+    <button type="button" class="btn btn-danger remove-added-para-btn mt-2">
+        Supprimer paragraph
+    </button>
+</div>`);
+  });
+  $(document).on("click", ".remove-added-para-btn", function (e) {
+    e.preventDefault();
+    $(this).parent().remove();
+  });
+  $(".add-added-img-btn").on("click", function (e) {
+    e.preventDefault();
+    $(
+      "#added-images"
+    ).append(`<div class="form-group mb-3 row row-cols-2 align-items-center">
+    <div class="col md-cols-8">
+        <input class="form-control" type="file" name="addedNewsImages[]">
+    </div>
+    <div class="col md-cols-4">
+        <button type="button" class="btn btn-danger remove-added-img-btn">
+            Supprimer image
+        </button>
+    </div>
+</div>`);
+  });
+  $(document).on("click", ".remove-added-img-btn", function (e) {
     e.preventDefault();
     $(this).parent().parent().remove();
   });

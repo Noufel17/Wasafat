@@ -1,6 +1,6 @@
 <?php
 require_once('./views/Components.php');
-require_once('./controllers/GestionRecettesController.php');
+require_once('./controllers/GestionNewsController.php');
 require_once('./views/GlobalView.php');
 class PageAjoutNewsView extends GlobalView
 {
@@ -41,7 +41,7 @@ class PageAjoutNewsView extends GlobalView
             </div>
 
             <div class="form-group mb-3">
-                <label for="newsVideo" class="form-label">Vidéo de la recette</label>
+                <label for="newsVideo" class="form-label">Vidéo de la news</label>
                 <input class="form-control" type="file" id="newsVideo" name="newsVideo">
             </div>
             <div class="card">

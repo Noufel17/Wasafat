@@ -107,4 +107,8 @@ switch ($request) {
         $controller = new MessagesController();
         $controller->afficherMessages();
         break;
+    case '/Projet_tdw/admin/modifier-news':
+        $controller = new GestionNewsController();
+        $controller->afficherPageModifierNews($idNews);
+        break;
 }
