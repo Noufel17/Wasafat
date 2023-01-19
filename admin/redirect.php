@@ -5,6 +5,7 @@ require_once("./controllers/GestionNewsController.php");
 require_once("./controllers/GestionUsersController.php");
 require_once("./controllers/GestionNutritionController.php");
 require_once("./controllers/ParametresController.php");
+require_once("./controllers/MessagesController.php");
 
 if (isset($_POST['login'])) {
     $controller = new PageLoginController();
@@ -77,4 +78,8 @@ if (isset($_POST['modifier-ingredient'])) {
 if (isset($_POST['modifier-context'])) {
     $controller = new ParametresController();
     $controller->modifierContext();
+}
+if (isset($_POST['supprimer-message'])) {
+    $controller = new MessagesController();
+    $controller->supprimerMessage();
 }

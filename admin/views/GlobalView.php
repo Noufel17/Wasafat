@@ -45,8 +45,6 @@ class GlobalView
         </button>
     </form>
 </div>
-
-
 <?php
     }
 }

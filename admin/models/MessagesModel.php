@@ -18,4 +18,17 @@ class MessagesModel extends DBconnection
             var_dump($e->getMessage());
         }
     }
+    public function supprimerMessage($idMessage){
+        try {
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $qry = "DELETE FROM contact WHERE idMessage=:idMessage";
+            $stmt = $dataBase->prepare($qry);
+            $stmt->execute(["idMessage"=>$idMessage]);
+        } catch (Exception $e) {
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
+    }
 }

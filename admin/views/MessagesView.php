@@ -32,6 +32,7 @@ class MessagesView extends GlobalView
                         <th data-sortable="true">email</th>
                         <th data-sortable="true">téléphone</th>
                         <th data-sortable="true">message</th>
+                        <th>supprimer</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +45,17 @@ class MessagesView extends GlobalView
                         <td><?php echo $message["email"]?></td>
                         <td><?php echo "0".$message["telephone"]?></td>
                         <td><?php echo $message["message"]?></td>
+                        <td>
+                            <div class="d-flex flex-row justify-content-center align-items-center">
+                                <form action="./redirect.php" method="post" class="mb-0">
+                                    <input type="hidden" name="idMessage" value="<?php echo $message["idMessage"] ?>">
+                                    <button type="submit" name="supprimer-message" class="btn-d-none"
+                                        data-toggle="tooltip" data-placement="bottom" title="supprimer message">
+                                        <i class="fa-solid fa-trash color m-auto"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                     <?php
                     }

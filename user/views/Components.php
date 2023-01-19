@@ -40,11 +40,11 @@ class Components
     public function cardIngredient($id, $nom, $healthy,$proportionHealthy,$saison,$calories)
     {
     ?>
-<div class="card card-style shadow m-auto" style="width:274px;">
+<div class="card card-style shadow m-auto" style="width:274px;height:200px">
     <div class="card-header">
         <h3 style="font-weight:bold"><?php echo $nom ?></h3>
     </div>
-    <div class="card-body">
+    <div class="card-body d-flex flex-column justify-content-center align-items-center">
         <?php
                 if ($healthy == 1) {
                 ?>
@@ -85,7 +85,6 @@ class Components
         <a href="<?php echo "/Projet_tdw/user/category?idCategory=" . strtolower($title) ?>">
             <h1 style="font-weight: bold;"><?php echo $title ?></h1>
         </a>
-
     </center>
     <div class="container-fluid py-2 overflow-hidden" style="max-width:80%;">
         <div class="d-flex flex-row justify-content-start flex-nowrap gap-4 overflow-scroll py-4">
@@ -138,9 +137,10 @@ class Components
     public function searchFilterHeader($title, $filter)
     {
         ?>
-<div class="d-flex flex-row justify-content-between align-items-center mx-auto my-5" style="width:80%;">
+<div class="d-flex flex-row justify-content-between flex-column flex-md-row align-items-center mx-auto my-5"
+    style="width:80%;">
     <h1><?php echo $title ?></h1>
-    <div class="d-flex flex-row justify-content-center align-items-center gap-4">
+    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
         <input class="form-control form-control-lg mr-sm-2" style="height:32px" type="search" placeholder="recherche"
             aria-label="Search" id="search-bar">
         <button id="sort-btn" class="action-btn">

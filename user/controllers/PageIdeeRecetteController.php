@@ -24,7 +24,6 @@ class PageIdeeRecetteController
                 }
             }
             if (($counter / $numberOfIngredients) > 0.7) {
-                echo ($counter / $numberOfIngredients) . "/";
                 array_push($recettesToReturn, $recette);
             }
         }

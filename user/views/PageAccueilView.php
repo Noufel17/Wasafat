@@ -17,11 +17,10 @@ class PageAccueilView extends GlobalView
                 foreach ($images as $image) {
                     if ($image["idItem"] == 1) {
                 ?>
-
         <div id="<?php echo $image["idItem"] ?>" class="carousel-item active">
             <a href="<?php echo "/Projet_tdw/user" . $image["lienDiapo"] ?>">
-                <img src=<?php echo $image["diapoImage"] ?> alt="" class="d-block w-100"
-                    style="height:600px;object-fit:cover">
+                <img src=<?php echo $image["diapoImage"] ?> alt="" class="d-block w-100 carousel-img"
+                    style="object-fit:cover">
             </a>
         </div>
         <?php
@@ -30,8 +29,8 @@ class PageAccueilView extends GlobalView
 
         <div id="<?php echo $image["idItem"] ?>" class="carousel-item">
             <a href="<?php echo "/Projet_tdw/user" . $image["lienDiapo"] ?>">
-                <img src=<?php echo $image["diapoImage"] ?> alt="" class="d-block w-100"
-                    style="height:600px;object-fit:cover">
+                <img src=<?php echo $image["diapoImage"] ?> alt="" class="d-block w-100 carousel-img"
+                    style="object-fit:cover">
             </a>
         </div>
         <?php

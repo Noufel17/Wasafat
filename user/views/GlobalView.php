@@ -116,10 +116,9 @@ class GlobalView
     ?>
 <div class="footer">
     <center>
-        <div class="contact mx-auto">
+        <div class="d-flex flex-row justify-content-start align-items-center gap-4">
             <div class="d-flex flex-row justify-content-start gap-2 my-2">
                 <img src="../public/icons/phone" alt="" height="24px" width="24px">
-
                 <p>0549741711</p>
             </div>
             <div class="d-flex flex-row justify-content-start gap-2 my-2">
@@ -170,7 +169,6 @@ class GlobalView
                     ?>
         </div>
     </center>
-
 </div>
 
 <?php

@@ -98,8 +98,7 @@ class Components
     {
     ?>
 <div class="simple-media-container m-auto overflow-hidden">
-    <img src="<?php echo "../public/images/recettes" . $lienImage ?>" alt="" width="100%"
-        style="max-height:600px;object-fit:cover">
+    <img src="<?php echo "../public/images/recettes" . $lienImage ?>" alt="" width="100%" style="object-fit:cover">
 </div>
 <?php
     }

@@ -17,7 +17,7 @@ class PageProfileView extends GlobalView
     {
 ?>
 <div class="container m-auto" style="width:80%;">
-    <div class="row row-cols-2">
+    <div class="row row-cols-1 row-cols-md-2">
         <div class="col overflow-hidden d-flex flex-column justify-content-center align-items-center">
             <img src="<?php echo "../public/images/profile" . $_SESSION["user"]["imageProfile"] ?>" alt=""
                 class="round mx-auto">

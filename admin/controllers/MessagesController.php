@@ -9,6 +9,12 @@ class MessagesController
         $model = new MessagesModel();
         return $model->getAllMessages();
     }
+    public function supprimerMessage(){
+        $idMessage = $_POST["idMessage"];
+        $model = new MessagesModel();
+        $model->supprimerMessage($idMessage);
+        header("Location: ./messages");
+    }
     public function afficherMessages(){
         $view = new MessagesView();
         $view->afficherMessages();

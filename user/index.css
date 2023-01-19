@@ -53,6 +53,40 @@ nav {
   align-items: center;
   gap: 48px;
 }
+.carousel-img {
+  height: 600px;
+}
+.idee-form {
+  width: 40%;
+}
+@media ((min-width: 450px) and (max-width: 900px)) {
+  .social-signin {
+    flex-direction: column;
+  }
+  .header-container {
+    flex-direction: column;
+  }
+  .carousel-img {
+    height: 400px;
+  }
+  .idee-form {
+    width: 80%;
+  }
+}
+@media (max-width: 450px) {
+  .carousel-img {
+    height: 200px;
+  }
+  .social-signin {
+    flex-direction: column;
+  }
+  .header-container {
+    flex-direction: column;
+  }
+  .idee-form {
+    width: 90%;
+  }
+}
 .action-btn {
   border: none;
   border-radius: 20px;
@@ -134,6 +168,7 @@ nav {
   margin-top: 2%;
   margin-bottom: 0;
 }
+
 .card-style {
   border-radius: 20px;
   overflow: hidden;
@@ -182,8 +217,6 @@ label {
   margin: 0 !important;
   padding: 0 !important;
 }
-
-/****** Style Star Rating Widget *****/
 
 .rating {
   border: none !important;
@@ -234,8 +267,8 @@ label {
 }
 
 .round {
-  height: 300px;
-  width: 300px;
+  height: 280px;
+  width: 280px;
   border-radius: 50%;
 }
 .description {
@@ -245,12 +278,4 @@ label {
   font-size: x-large;
   font-weight: normal;
   text-align: center;
-}
-@media (min-width: 900px) {
-  .idee-form {
-    width: 40%;
-  }
-}
-.idee-form {
-  width: 40%;
 }

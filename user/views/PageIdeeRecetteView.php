@@ -53,8 +53,8 @@ class PageIdeeRecetteView extends GlobalView
         </div>
         <div class="card-body">
             <div id="ingredients">
-                <div class="row row-cols-2 mb-3">
-                    <div class="form-group cols-md-8">
+                <div class="row row-cols-2 mb-3 align-items-center">
+                    <div class="form-group">
                         <select name="idIngredient[]" class="form-control" required placeholder="choisir un ingredient">
                             <option value="0" selected>choisir ingrédient</option>
                             <?php
@@ -69,10 +69,12 @@ class PageIdeeRecetteView extends GlobalView
                                     ?>
                         </select>
                     </div>
-                    <div class="">
-                        <center><button class="btn btn-success add-ing-btn-ir">
+                    <div>
+                        <center>
+                            <button class="btn btn-success add-ing-btn-ir" style="font-size:14px">
                                 Ajouter ingrédient
-                            </button></center>
+                            </button>
+                        </center>
                     </div>
                 </div>
             </div>
