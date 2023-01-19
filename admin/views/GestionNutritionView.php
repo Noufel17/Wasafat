@@ -49,7 +49,7 @@ class GestionNutritionView extends GlobalView
                             echo "oui";}else{echo "non";} ?></td>
                         <td><?php echo $ingredient["proportionHealthy"] ?></td>
                         <td><?php if ($ingredient["calories"] != NULL) {
-                            echo $ingredient["calories"] . " par 100 grams";}else{
+                            echo $ingredient["calories"] . " cal/100 g";}else{
                             echo $ingredient["calories"];
                             } ?></td>
                         <td>

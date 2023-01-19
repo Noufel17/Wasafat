@@ -47,6 +47,12 @@ if (isset($_GET['idee-filter'])) {
     }
     $request = explode('?', $request)[0];
 }
+if (isset($_GET['failed'])) {
+    $failed = $_GET['failed'];
+    $request = explode('?', $request)[0];
+}else{
+    $failed = 0;
+}
 switch ($request) {
     case "/Projet_tdw/user/":
         $controller = new PageAccueilController();
@@ -94,7 +100,7 @@ switch ($request) {
         break;
     case '/Projet_tdw/user/login':
         $controller = new PageLoginController();
-        $controller->afficherPageLogin();
+        $controller->afficherPageLogin($failed);
         break;
     case '/Projet_tdw/user/register':
         $controller = new PageRegisterController();

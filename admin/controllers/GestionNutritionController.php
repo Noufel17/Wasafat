@@ -40,11 +40,12 @@ class GestionNutritionController
         $calories = $_POST["calories"];
         if (isset($_POST["healthy"])) {
             $healthy = 1;
+            $proportionHealthy = $_POST["proportionHealthy"];
         } else {
             $healthy = 0;
+            $proportionHealthy = NULL;
         }
         $saisonNaturelle = $_POST["saisonNaturelle"];
-        $proportionHealthy = $_POST["proportionHealthy"];
         $model= new GestionNutritionModel();
         $model->modifierIngredient(
             $idIngredient,

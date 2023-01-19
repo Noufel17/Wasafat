@@ -51,8 +51,8 @@ class PageModifierIngredientView extends GlobalView
             <div class="form-row row row-cols-1">
                 <div class="form-group w-100">
                     <label>Proportion healthy</label>
-                    <input type="number" step="0.01" class=" form-control" name="proportionHealthy" name="calories"
-                        placeholder="la proportion healthy de l'ingrédient"
+                    <input type="number" step="0.01" max="1" min="0" class=" form-control" name="proportionHealthy"
+                        name="calories" placeholder="la proportion healthy de l'ingrédient"
                         value="<?php echo $ingredient["proportionHealthy"] ?>">
                 </div>
             </div>

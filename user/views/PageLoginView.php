@@ -1,7 +1,7 @@
 <?php
 class PageLoginView extends GlobalView
 {
-    public function content()
+    public function content($failed)
     {
 ?>
 <div class="container">
@@ -9,7 +9,15 @@ class PageLoginView extends GlobalView
         <div class="col d-flex justify-content-center align-items-center">
             <img src="../public/images/logo" alt="" class="img-fluid">
         </div>
-        <div class="col d-flex justify-content-center align-items-center font">
+        <div class="col d-flex flex-column gap-4 justify-content-center align-items-center font">
+            <?php
+if($failed==1){ 
+?>
+            <div class="mt-2 alert alert-danger alert-dismissible  fade show text-center px-2" style="width:324px"
+                role="alert">
+                Email ou mot de passe incorrect <br>ou compte non activé!
+            </div>
+            <?php } ?>
             <form action="./redirect.php" method="post"
                 class=" radius-20 shadow d-flex flex-column justify-content-center align-items-center gap-4 p-4">
                 <h3>Login</h3>
@@ -25,7 +33,6 @@ class PageLoginView extends GlobalView
                 <button type="submit" class="action-btn" name="login">Se connecter</button>
                 <div>Pas du cempte?<a href=" /Projet_tdw/user/register">créer un cempte</a>
                 </div>
-
             </form>
         </div>
     </div>
@@ -34,9 +41,9 @@ class PageLoginView extends GlobalView
 
 <?php
     }
-    public function afficherPageLogin()
+    public function afficherPageLogin($failed)
     {
         $this->head();
-        $this->content();
+        $this->content($failed);
     }
 }

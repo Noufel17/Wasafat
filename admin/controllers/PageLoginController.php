@@ -17,7 +17,7 @@ class PageLoginController
             header('Location: /Projet_tdw/admin/acceuil');
             exit();
         } else {
-            header('Location: /Projet_tdw/admin/login');
+            header('Location: /Projet_tdw/admin/login?failed=1');
         }
     }
     public function Handlelogout()
@@ -28,9 +28,9 @@ class PageLoginController
         header('Location: /Projet_tdw/admin/');
         exit();
     }
-    public function afficherPageLogin()
+    public function afficherPageLogin($failed)
     {
         $view = new PageLoginView();
-        $view->afficherPageLogin();
+        $view->afficherPageLogin($failed);
     }
 }

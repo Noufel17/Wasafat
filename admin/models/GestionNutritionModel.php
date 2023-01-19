@@ -54,17 +54,30 @@ class GestionNutritionModel extends DBconnection
             $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
             $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            $qry = "UPDATE ingredient SET nomIngredient=:nomIngredient,calories=:calories,healthy=:healthy,saisonNaturelle=:saisonNaturelle,proportionHealthy=:proportionHealthy
-            WHERE idIngredient=:idIngredient";
-            $stmt = $dataBase->prepare($qry);
-            $stmt->execute([
-                "idIngredient"=>$idIngredient,
-                "nomIngredient"=>$nomIngredient,
-                "calories"=>$calories,
-                "healthy"=>$healthy,
-                "saisonNaturelle"=>$saisonNaturelle,
-                "proportionHealthy"=>$proportionHealthy
-            ]);
+            if($proportionHealthy != NULL){
+                $qry = "UPDATE ingredient SET nomIngredient=:nomIngredient,calories=:calories,healthy=:healthy,saisonNaturelle=:saisonNaturelle,proportionHealthy=:proportionHealthy
+                WHERE idIngredient=:idIngredient";
+                $stmt = $dataBase->prepare($qry);
+                $stmt->execute([
+                    "idIngredient"=>$idIngredient,
+                    "nomIngredient"=>$nomIngredient,
+                    "calories"=>$calories,
+                    "healthy"=>$healthy,
+                    "saisonNaturelle"=>$saisonNaturelle,
+                    "proportionHealthy"=>$proportionHealthy
+                ]);
+            }else{
+                $qry = "UPDATE ingredient SET nomIngredient=:nomIngredient,calories=:calories,healthy=:healthy,saisonNaturelle=:saisonNaturelle
+                WHERE idIngredient=:idIngredient";
+                $stmt = $dataBase->prepare($qry);
+                $stmt->execute([
+                    "idIngredient"=>$idIngredient,
+                    "nomIngredient"=>$nomIngredient,
+                    "calories"=>$calories,
+                    "healthy"=>$healthy,
+                    "saisonNaturelle"=>$saisonNaturelle
+                ]);
+            }
         } catch (Exception $e) {
             echo 'Exception -> ';
             var_dump($e->getMessage());

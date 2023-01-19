@@ -71,17 +71,17 @@ class ParametresView extends GlobalView
                 <div class="card-header">
                     Modifier la saison actuelle et le pourcentage de idée recette
                 </div>
-                <div class="card-body">
+                <div class="card-body w-50 mx-auto">
                     <form action="./redirect.php" method="POST" id="params-form"
                         class=" radius-20 shadow d-flex flex-column gap-4 p-4">
                         <div class="form-row d-flex flex-row align-items-center justify-content-center gap-4">
-                            <div class="form-group" style="min-width:220px">
+                            <div class="form-group col w-50" style="min-width:220px">
                                 <label>Pourcetage idée recette</label>
                                 <input type="number" step="0.01" class="form-control" name="pourcentage"
                                     value="<?php echo $context["pourcentage"] ?>">
                             </div>
-                            <div class="form-group col">
-                                <label>saison actuelle</label>
+                            <div class="form-group col w-50">
+                                <label>Saison actuelle</label>
                                 <select name="saison" class="form-control" required>
                                     <?php 
                     if($context["saison"]=="automne"){

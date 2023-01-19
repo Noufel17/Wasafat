@@ -30,14 +30,20 @@ if (isset($_GET['idIngredient'])) {
     $idIngredient = $_GET['idIngredient'];
     $request = explode('?', $request)[0];
 }
+if (isset($_GET['failed'])) {
+    $failed = $_GET['failed'];
+    $request = explode('?', $request)[0];
+}else{
+    $failed=0;
+}
 switch ($request) {
     case "/Projet_tdw/admin/":
         $controller = new PageLoginController();
-        $controller->afficherPageLogin();
+        $controller->afficherPageLogin($failed);
         break;
     case '/Projet_tdw/admin/login':
         $controller = new PageLoginController();
-        $controller->afficherPageLogin();
+        $controller->afficherPageLogin($failed);
         break;
     case '/Projet_tdw/admin/acceuil':
         $controller = new PageAccueilController();
