@@ -8,10 +8,12 @@ class ParametresView extends GlobalView
     {
         $controller = new ParametresController();
         $diapo = $controller->getDiapo();
-        $this->parametres($diapo);
+        $context = $controller->getContext();
+        $this->parametres($diapo,$context);
+       
     }
 
-    public function parametres($diapo){
+    public function parametres($diapo,$context){
         ?>
 <center class="my-4">
     <a href="./acceuil" class="action-btn" style="test-decoration:none">
@@ -65,6 +67,67 @@ class ParametresView extends GlobalView
                     ?>
                 </tbody>
             </table>
+            <div class="card mt-4">
+                <div class="card-header">
+                    Modifier la saison actuelle et le pourcentage de idée recette
+                </div>
+                <div class="card-body">
+                    <form action="./redirect.php" method="POST" id="params-form"
+                        class=" radius-20 shadow d-flex flex-column gap-4 p-4">
+                        <div class="form-row d-flex flex-row align-items-center justify-content-center gap-4">
+                            <div class="form-group" style="min-width:220px">
+                                <label>Pourcetage idée recette</label>
+                                <input type="number" step="0.01" class="form-control" name="pourcentage"
+                                    value="<?php echo $context["pourcentage"] ?>">
+                            </div>
+                            <div class="form-group col">
+                                <label>saison actuelle</label>
+                                <select name="saison" class="form-control" required>
+                                    <?php 
+                    if($context["saison"]=="automne"){
+                        ?>
+                                    <option value="automne" selected>Automne</option>
+                                    <option value="hiver">Hiver</option>
+                                    <option value="ete">Eté</option>
+                                    <option value="printemps">Printemps</option>
+                                    <?php
+                    }
+                    if($context["saison"]=="hiver"){
+                        ?>
+                                    <option value="automne">Automne</option>
+                                    <option value="hiver" selected>Hiver</option>
+                                    <option value="ete">Eté</option>
+                                    <option value="printemps">Printemps</option>
+                                    <?php
+                    }
+                    if($context["saison"]=="ete"){
+                        ?>
+                                    <option value="automne">Automne</option>
+                                    <option value="hiver">Hiver</option>
+                                    <option value="ete" selected>Eté</option>
+                                    <option value="printemps">Printemps</option>
+                                    <option value="partout">Partout</option>
+                                    <?php
+                    }
+                    if($context["saison"]=="printemps"){
+                        ?>
+                                    <option value="automne">Automne</option>
+                                    <option value="hiver">Hiver</option>
+                                    <option value="ete">Eté</option>
+                                    <option value="printemps" selected>Printemps</option>
+                                    <option value="partout">Partout</option>
+                                    <?php
+                    }
+                     ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <center> <button type="submit" class="action-btn" name="modifier-context">Modifier</button>
+                        </center>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

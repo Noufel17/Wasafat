@@ -23,7 +23,10 @@ class Components
 <div class="card card-style shadow m-auto" style="width:274px;">
     <img class="card-img-top" src="<?php echo "../public/images/news" . $image ?>" alt="" height="200px">
     <div class="card-body">
-        <h5 class="card-title" style="font-weight:bold"><?php echo $title ?></h5>
+        <h5 class="card-title" style="font-weight:bold"><?php if(strlen($title)>50){
+            echo substr($title, 0, 30) . "...";
+        } else {
+            echo $title;} ?></h5>
         <p class="card-text" style="font-weight:normal"><?php echo $description ?></p>
         <center>
             <a href="<?php echo "/Projet_tdw/user/news-details?idNews=" . strtolower($id) ?>"

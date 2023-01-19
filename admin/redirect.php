@@ -74,3 +74,7 @@ if (isset($_POST['modifier-ingredient'])) {
     $controller = new GestionNutritionController();
     $controller->modifierIngredient();
 }
+if (isset($_POST['modifier-context'])) {
+    $controller = new ParametresController();
+    $controller->modifierContext();
+}

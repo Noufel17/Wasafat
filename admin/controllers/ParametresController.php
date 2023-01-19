@@ -129,4 +129,19 @@ class ParametresController
         $model->supprimerDiapo($idItem);
         header("Location: ./parametres");
     }
+    public function getContext(){
+        $model = new ParametresModel();
+        return $model->getContext();
+    }
+    public function modifierContext(){
+        if($_POST["saison"]){
+            $saison = $_POST["saison"];
+        }
+        if (isset($_POST["pourcentage"])) {
+            $pourcentage = $_POST["pourcentage"];
+        }
+        $model = new ParametresModel();
+        $model->modifierContext($saison, $pourcentage);
+        header("Location: ./parametres");
+    }
 }

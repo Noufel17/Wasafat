@@ -75,4 +75,35 @@ class ParametresModel extends DBconnection
             var_dump($e->getMessage());
         }
     }
+    public function getContext(){
+        try {
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $qry = "SELECT * FROM context";
+            $stmt = $dataBase->prepare($qry);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return $result;
+        }catch(Exception $e){
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
+    }
+    public function modifierContext($saison,$pourcentage){
+        try {
+            $dataBase = $this->connecterDB($this->DBname, $this->host, $this->user, $this->password);
+            $dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $qry = "UPDATE context SET saison=:saison, pourcentage=:pourcentage";
+            $stmt = $dataBase->prepare($qry);
+            $stmt->execute([
+                "saison"=>$saison,
+                "pourcentage"=>$pourcentage
+            ]);
+        }catch(Exception $e){
+            echo 'Exception -> ';
+            var_dump($e->getMessage());
+        }
+    }
 }
