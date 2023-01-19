@@ -23,7 +23,7 @@ class GlobalView
     </script>
 
     <link rel="icon" href="../public/images/wasafat-logo">
-    <title>projet_TDW</title>
+    <title>projet_TDW admin</title>
 </head>
 <?php
     }

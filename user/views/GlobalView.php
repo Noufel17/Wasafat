@@ -19,7 +19,7 @@ class GlobalView
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script defer src="./jquery.js"></script>
     <link rel="icon" href="../public/images/wasafat-logo">
-    <title>projet_TDW</title>
+    <title>projet_TDW user</title>
 </head>
 <?php
     }
